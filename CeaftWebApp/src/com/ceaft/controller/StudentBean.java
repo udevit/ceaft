@@ -68,6 +68,7 @@ public class StudentBean {
 		try{
 			if(studentId > 0){
 				studentVO = svc.register(studentId);
+				//comentario de yo 
 			}else{
 				//show an error
 			}
