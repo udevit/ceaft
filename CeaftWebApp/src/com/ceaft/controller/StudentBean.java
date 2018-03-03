@@ -7,6 +7,11 @@ import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.StudentDTO;
 import com.ceaft.service.IStudentService;
 
+/**
+ * 
+ * @author Gary
+ *
+ */
 @ManagedBean(name="student")
 public class StudentBean {
 	@EJB
