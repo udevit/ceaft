@@ -11,12 +11,34 @@
 		<title>Ceaft Web App - Registro de Asistencia</title>
 	</h:head>
 	<h:body>
+		<h:outputStylesheet library="css" name="asistencia.css" />
+		<p:clock pattern="HH:mm:ss" />
+		<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
+		<p class="advice" >Presenta tu credencial para registrar tu asistencia</p>
+		<p class="siglas">CEAFT Centro de Aprendizaje y Formación para el Trabajo</p>
+		<p class="direccion">Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México</p>
+		<div class="divFooter">
+			
+				<p:commandLink >Advertising</p:commandLink>
+				<p:commandLink>Business</p:commandLink>
+				<p:commandLink>Privacy</p:commandLink>
+				<p:commandLink>Terms</p:commandLink>
+				<p:commandLink>Settings</p:commandLink>
+			
+		</div>
+		
+		
+		
 		<h:form>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Matricula"/>
 				<p:inputText value="#{student.studentId}"/>
 			</p:panelGrid>
 			<p:commandButton value="Registrar" actionListener="#{student.register}"/>
+			
 		</h:form>
+		
+    
+		
 	</h:body>
 </html>
