@@ -13,37 +13,60 @@
 	</h:head>
 	
 	<h:body>
-		<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2" cellpadding="10" width="100%">
-			<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
-			<p:clock pattern="HH:mm:ss" id="reloj"/>
-		</h:panelGrid>
-		
-		<p:panel styleClass="footer">
-			<h:panelGrid width="100%" cellpadding="1">
-				<h:outputText styleClass="footerCeaft" value="CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo"/>
-				<h:outputText  styleClass="footerAddress" value="Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México"/>
+		<h:form>
+			<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2" cellpadding="10" width="100%">
+				<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
+				<p:clock pattern="HH:mm:ss" id="reloj"/>
 			</h:panelGrid>
-		</p:panel>
-		
-		<p:dialog visible="true" closable="false" resizable="false" responsive="true">
-			<f:facet name="header">
-				<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
-		    		<h:graphicImage value="resources/images/user-header.png"/>
-		    		<h:outputLabel value="Ceaft Web App"/>
-		    	</h:panelGrid>
-		    </f:facet>
-			 <p:panel>
-			 	<h:panelGrid>
-			 		<p:inputText placeholder="Presenta tu credencial para registrar tu asistencia" size="50"/>
-			 	</h:panelGrid>
-			 </p:panel>
-			 <f:facet name="footer">
-			 	<h:panelGrid columns="3" columnClasses="dialogFooter">
-		    		<h:outputLabel value="Versión 1.0"/>
-		    	</h:panelGrid>
-			 </f:facet>
-		</p:dialog>
-		
+			
+			<p:panel styleClass="footer">
+				<h:panelGrid width="100%" cellpadding="1">
+					<h:outputText styleClass="footerCeaft" value="CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo"/>
+					<h:outputText  styleClass="footerAddress" value="Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México"/>
+				</h:panelGrid>
+			</p:panel>
+			
+			<p:remoteCommand name="register" actionListener="#{student.register}"/>
+  
+			<p:dialog visible="true" closable="false" resizable="false" responsive="true">
+				<f:facet name="header">
+					<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+			    		<h:graphicImage value="resources/images/user-header.png"/>
+			    		<h:outputLabel value="Ceaft Web App"/>
+			    	</h:panelGrid>
+			    </f:facet>
+				 <p:panel>
+				 	<h:panelGrid>
+				 		<p:inputText placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
+				 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
+				 	</h:panelGrid>
+				 </p:panel>
+				 <f:facet name="footer">
+				 	<h:panelGrid columns="3" columnClasses="dialogFooter">
+			    		<h:outputLabel value="Versión 1.0"/>
+			    	</h:panelGrid>
+				 </f:facet>
+			</p:dialog>
+			
+			<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog">
+				<f:facet name="header">
+					<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+			    		<h:graphicImage value="resources/images/user-header.png"/>
+			    		<h:outputLabel value="Ceaft Web App"/>
+			    	</h:panelGrid>
+			    </f:facet>
+				 <p:panel>
+				 	<h:panelGrid>
+				 		<h:outputText value="Error"/>
+				 	</h:panelGrid>
+				 </p:panel>
+				 <f:facet name="footer">
+				 	<h:panelGrid columns="3" columnClasses="dialogFooter">
+			    		<h:outputLabel value="Versión 1.0"/>
+			    	</h:panelGrid>
+				 </f:facet>
+			</p:dialog>
+		</h:form>
 	</h:body>
 	
 </html>
