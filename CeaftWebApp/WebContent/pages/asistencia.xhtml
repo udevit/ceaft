@@ -9,36 +9,16 @@
 
 	<h:head>
 		<title>Ceaft Web App - Registro de Asistencia</title>
-	</h:head>
-	<h:body>
 		<h:outputStylesheet library="css" name="asistencia.css" />
-		<p:clock pattern="HH:mm:ss" id="reloj"/>
-		<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
-		<p class="advice" >Presenta tu credencial para registrar tu asistencia</p>
-		<p class="siglas">CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo</p>
-		<p class="direccion">Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México</p>
-		<div class="divFooter">
-			
-				<p:commandLink id="uno">Advertising</p:commandLink>
-				<p:commandLink id="dos">Business</p:commandLink>
-				<p:commandLink id="tres">Privacy</p:commandLink>
-				<p:commandLink id="cuatro">Terms</p:commandLink>
-				<p:commandLink id="cinco">Settings</p:commandLink>
-			
-		</div>
-		
-		
-		
-		<h:form>
-			<p:panelGrid columns="2">
-				<p:outputLabel value="Matricula"/>
-				<p:inputText value="#{student.studentId}"/>
-			</p:panelGrid>
-			<p:commandButton value="Registrar" actionListener="#{student.register}"/>
-			
-		</h:form>
-		
-    
-		
+	</h:head>
+	
+	<h:body>
+		<h:panelGrid border="1" width="100%" style="text-align: center">
+			<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2"  border="1" width="100%">
+				<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
+				<p:clock pattern="HH:mm:ss" id="reloj"/>
+			</h:panelGrid>
+		</h:panelGrid>
 	</h:body>
+	
 </html>
