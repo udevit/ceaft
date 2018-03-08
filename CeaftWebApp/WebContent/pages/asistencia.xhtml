@@ -8,65 +8,72 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<title>Ceaft Web App - Registro de Asistencia</title>
+		<title>#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}</title>
 		<h:outputStylesheet library="css" name="asistencia.css" />
 	</h:head>
 	
 	<h:body>
-		<h:form>
-			<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2" cellpadding="10" width="100%">
-				<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
-				<p:clock pattern="HH:mm:ss" id="reloj"/>
+		
+		<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2" cellpadding="10" width="100%">
+			<h:graphicImage class="logo" value="resources/images/logo_CEAFT.jpeg" />
+			<p:clock pattern="HH:mm:ss" id="reloj"/>
+		</h:panelGrid>
+		
+		<p:panel styleClass="footer">
+			<h:panelGrid width="100%" cellpadding="1">
+				<h:outputText styleClass="footerCeaft" value="CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo"/>
+				<h:outputText  styleClass="footerAddress" value="Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México"/>
 			</h:panelGrid>
-			
-			<p:panel styleClass="footer">
-				<h:panelGrid width="100%" cellpadding="1">
-					<h:outputText styleClass="footerCeaft" value="CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo"/>
-					<h:outputText  styleClass="footerAddress" value="Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México"/>
-				</h:panelGrid>
-			</p:panel>
-			
-			<p:remoteCommand name="register" actionListener="#{student.register}"/>
-  
-			<p:dialog visible="true" closable="false" resizable="false" responsive="true">
-				<f:facet name="header">
-					<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
-			    		<h:graphicImage value="resources/images/user-header.png"/>
-			    		<h:outputLabel value="Ceaft Web App"/>
-			    	</h:panelGrid>
-			    </f:facet>
-				 <p:panel>
-				 	<h:panelGrid>
-				 		<p:inputText placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
+		</p:panel>
+ 
+		<p:dialog widgetVar="userDialog" visible="true" closable="false" 
+			resizable="false" responsive="true" focus="myUserForm:userId">
+			<f:facet name="header">
+				<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+		    		<h:graphicImage value="resources/images/user-header.png" width="40"/>
+		    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}"/>
+		    	</h:panelGrid>
+		    </f:facet>
+			 <p:panel>
+			 	<h:panelGrid>
+			 		<h:form id="myUserForm">
+			 			<p:remoteCommand name="register" actionListener="#{student.register}"/>
+				 		<p:inputText id="userId"
+				 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
 				 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
-				 	</h:panelGrid>
-				 </p:panel>
-				 <f:facet name="footer">
-				 	<h:panelGrid columns="3" columnClasses="dialogFooter">
-			    		<h:outputLabel value="Versión 1.0"/>
-			    	</h:panelGrid>
-				 </f:facet>
-			</p:dialog>
-			
-			<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog">
-				<f:facet name="header">
-					<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
-			    		<h:graphicImage value="resources/images/user-header.png"/>
-			    		<h:outputLabel value="Ceaft Web App"/>
-			    	</h:panelGrid>
-			    </f:facet>
-				 <p:panel>
-				 	<h:panelGrid>
-				 		<h:outputText value="Error"/>
-				 	</h:panelGrid>
-				 </p:panel>
-				 <f:facet name="footer">
-				 	<h:panelGrid columns="3" columnClasses="dialogFooter">
-			    		<h:outputLabel value="Versión 1.0"/>
-			    	</h:panelGrid>
-				 </f:facet>
-			</p:dialog>
-		</h:form>
+					</h:form>
+			 	</h:panelGrid>
+			 </p:panel>
+			 <f:facet name="footer">
+			 	<h:panelGrid columns="3" columnClasses="dialogFooter">
+		    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
+		    	</h:panelGrid>
+			 </f:facet>
+		</p:dialog>
+		
+		<p:dialog resizable="false" visible="true" responsive="true" widgetVar="infoMessageDialog" focus="aceptar">
+			<f:facet name="header">
+				<h:panelGrid columns="3" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+		    		<h:graphicImage value="resources/images/home.png" width="20"/>
+		    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}"/>
+		    	</h:panelGrid>
+		    </f:facet>
+			 <p:panel>
+			 	<h:panelGrid columns="2">
+			 		<h:graphicImage value="resources/images/info.png" width="100"/>
+			 		<h:outputText value="Mensaje"/>
+			 	</h:panelGrid>
+			 	<h:panelGrid width="100%" style="text-align: center">
+			 		<p:commandButton id="aceptar" value="Aceptar" style="width: 300px"
+			 			onclick="PF('infoMessageDialog').hide();" oncomplete="PF('userDialog').show();"/>
+			 	</h:panelGrid>
+			 </p:panel>
+			 <f:facet name="footer">
+			 	<h:panelGrid columns="3" columnClasses="dialogFooter">
+		    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
+		    	</h:panelGrid>
+			 </f:facet>
+		</p:dialog>
 	</h:body>
 	
 </html>

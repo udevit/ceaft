@@ -2,8 +2,7 @@ package com.ceaft.controller;
 
 //import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-
-import org.primefaces.context.RequestContext;
+import javax.faces.bean.SessionScoped;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.StudentDTO;
@@ -16,7 +15,13 @@ import com.ceaft.util.StringUtil;
  *
  */
 @ManagedBean(name="student")
-public class StudentBean {
+@SessionScoped
+public class StudentBean extends CeaftBaseController{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//@EJB
 	private IStudentService svc;
 	private String studentId;
@@ -70,18 +75,19 @@ public class StudentBean {
 	public void register(){
 		try{
 			if(!StringUtil.isEmpty(studentId)){
-				//studentVO = svc.register(studentId);
+				studentVO = svc.register(studentId);
 			}else{
 				//show an error
-				RequestContext context = RequestContext.getCurrentInstance();
-				context.execute("PF('infoMessageDialog').show();");
+				showWindowDialog("infoMessageDialog");
 			}
-		}/*catch(ResourceNotFoundException e){
+		}catch(ResourceNotFoundException e){
 			//show an error message
 			e.printStackTrace();
-		}*/catch (Exception e) {
+			showWindowDialog("infoMessageDialog");
+		}catch (Exception e) {
 			//show an error
 			e.printStackTrace();
+			printErrorMessage("Ceaft Web App", "Sistema no disponible por el momento. Si el error persiste contacte al administrador.");
 		}
 	}
 	

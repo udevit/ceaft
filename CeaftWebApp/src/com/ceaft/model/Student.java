@@ -2,22 +2,22 @@ package com.ceaft.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Basic;
+/*import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Table;*/
 
-@Entity
-@Table(name = "user")
+/*@Entity
+@Table(name = "user")*/
 public class Student implements Serializable {
 
-	@Id
+	/*@Id
 	@Basic(optional = false)
-    @Column(name = "ID")
+    @Column(name = "ID")*/
 	private Integer id;
 	
-	@Column(name = "NAME")
+	//@Column(name = "NAME")
 	private String name;
 	
 	/**
