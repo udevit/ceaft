@@ -38,7 +38,7 @@
 			 	<h:panelGrid>
 			 		<h:form id="myUserForm">
 			 			<p:remoteCommand name="register" actionListener="#{student.register}"/>
-				 		<p:inputText id="userId"
+				 		<p:inputText id="userId" value="#{student.studentId}"
 				 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
 				 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
 					</h:form>
