@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-
-	<h:head>
-		<title>#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}</title>
-		<h:outputStylesheet library="css" name="asistencia.css" />
-	</h:head>
-	
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:body>
-		User Info
+		<ui:composition template="../templates/ceaft-basic-template.xhtml">
+			<ui:define name="header">
+				<p:panel>
+					<h:panelGrid columns="2" columnClasses="headerColumn1,headerColumn2" cellpadding="10" width="100%">
+						<h:graphicImage class="logo" alt="CEAFT" value="/resources/images/logo_CEAFT.jpeg" />
+						<p:panel>
+							<f:facet name="header">
+								<h:panelGrid columns="2" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+						    		<h:graphicImage alt="User logo" value="/resources/images/user-header.png" width="40"/>
+						    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.information']}"/>
+						    	</h:panelGrid>
+						    </f:facet>
+						    <h:panelGrid columns="2" cellpadding="10">
+						    	<h:graphicImage alt="User photo" value="/resources/images/man.png" width="170"/>
+						    	<h:panelGroup>
+						    		<h:panelGrid columns="2" style="text-align: left">
+								    	<p:outputLabel value="Matrícula"/>
+								    	<p:inputText value="" readonly="true"/>
+								    	<p:outputLabel value="Nombre"/>
+								    	<p:inputText value="" readonly="true"/>
+								    	<p:outputLabel value="Curso"/>
+								    	<p:inputText value="" readonly="true"/>
+								    	<p:outputLabel value="Horario"/>
+								    	<p:inputText value="" readonly="true"/>
+								    	<p:outputLabel value="Profesor"/>
+								    	<p:inputText value="" readonly="true"/>
+								    </h:panelGrid>
+							    </h:panelGroup>
+						    </h:panelGrid>
+						</p:panel>
+					</h:panelGrid>
+				</p:panel>
+			</ui:define>
+			<ui:define name="content">
+				<p:tabView dynamic="true">
+					<p:tab id="tab1" title="Asistencia">
+						<h:panelGrid columns="2" border="1">
+							<p:dataTable var="stdnt">
+								<p:column headerText="Matrícula">
+							        <h:outputText value="#{stdnt.id}" />
+							    </p:column>
+							</p:dataTable>
+							<!-- <p:chart type="pie" model="#{student.pieModel}" style="width:400px;height:300px"/>-->
+						</h:panelGrid>
+					</p:tab>
+			        <p:tab id="tab2" title="Adeudos">
+			            Data 2
+			        </p:tab>
+			    </p:tabView>
+			</ui:define>
+		</ui:composition>
 	</h:body>
-	
 </html>
