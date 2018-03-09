@@ -36,9 +36,14 @@
 		    </f:facet>
 			 <p:panel>
 			 	<h:panelGrid>
-		 			<p:inputText id="userId" value="#{student.studentId}"
-			 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
-			 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
+			 		<h:form>
+			 			<p:remoteCommand name="register" action="#{student.register}"
+			 				onstart="PF('loadingDialog').show();" oncomplete="PF('loadingDialog').hide();"
+			 				onerror="PF('loadingDialog').hide();"/>
+			 			<p:inputText id="userId" value="#{student.studentId}"
+				 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
+				 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
+				 	</h:form>
 			 	</h:panelGrid>
 			 </p:panel>
 			 <f:facet name="footer">
@@ -48,7 +53,8 @@
 			 </f:facet>
 		</p:dialog>
 		
-		<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog">
+		<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog"
+			onHide="PF('userDialog').show();" focus="aceptar">
 			<f:facet name="header">
 				<h:panelGrid columns="2" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
 		    		<h:graphicImage alt="Home logo" value="/resources/images/home.png" width="20"/>
@@ -70,6 +76,17 @@
 		    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
 		    	</h:panelGrid>
 			 </f:facet>
+		</p:dialog>
+		
+		<!-- Ajax dialog http://www.ajaxload.info/ -->
+		<p:dialog resizable="false" responsive="true" widgetVar="loadingDialog" 
+			closable="false" modal="true">
+			<f:facet name="header">
+				Cargando...
+		    </f:facet>
+		    <h:panelGrid width="100%" style="text-align: center">
+				<h:graphicImage alt="loading" value="/resources/images/loading.gif" width="20"/>
+			</h:panelGrid>
 		</p:dialog>
 	</h:body>
 	

@@ -1,6 +1,6 @@
 package com.ceaft.controller;
 
-//import javax.ejb.EJB;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,7 +22,7 @@ public class StudentBean extends CeaftBaseController{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//@EJB
+	@EJB
 	private IStudentService svc;
 	private String studentId;
 	private StudentDTO studentVO;
@@ -72,23 +72,31 @@ public class StudentBean extends CeaftBaseController{
 	/**
 	 * 
 	 */
-	public void register(){
+	public String register(){
 		try{
 			if(!StringUtil.isEmpty(studentId)){
 				studentVO = svc.register(studentId);
+				return "info";
 			}else{
 				//show an error
+				addRequestParameter("logo", "info.png");
+				addRequestParameter("message", "Favor de ingresar la matrícula del alumno.");
+				hideWindowDialog("userDialog");
 				showWindowDialog("infoMessageDialog");
 			}
 		}catch(ResourceNotFoundException e){
 			//show an error message
 			e.printStackTrace();
+			addRequestParameter("logo", "warning.png");
+			addRequestParameter("message", "Favor de ingresar la matrícula del alumno.");
+			hideWindowDialog("userDialog");
 			showWindowDialog("infoMessageDialog");
 		}catch (Exception e) {
 			//show an error
 			e.printStackTrace();
 			printErrorMessage("Ceaft Web App", "Sistema no disponible por el momento. Si el error persiste contacte al administrador.");
 		}
+		return "";
 	}
 	
 }

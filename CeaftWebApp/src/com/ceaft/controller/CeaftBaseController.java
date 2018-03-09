@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
@@ -52,4 +53,12 @@ public abstract class CeaftBaseController implements Serializable {
 		RequestContext context = RequestContext.getCurrentInstance();
 		context.execute("PF('" + widgetVar + "').hide();");
 	}
+	
+	protected void addRequestParameter(String key, String value){
+		FacesContext.getCurrentInstance()
+        	.getExternalContext()
+        	.getRequestMap()
+        	.put(key, value);
+	}
+	
 }
