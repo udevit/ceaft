@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 @Entity
@@ -20,6 +23,10 @@ public class Capacitacion implements Serializable {
 	@NotNull
 	@Column(name="ID_CAPACITACION")
 	private long idCapacitacion;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Curso curso;
 	
 	@Column(name="NOMBRE")
 	private String nombre;
@@ -38,6 +45,19 @@ public class Capacitacion implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
+	/**
+	 * @return the curso
+	 */
+	public Curso getCurso() {
+		return curso;
+	}
+
+	/**
+	 * @param curso the curso to set
+	 */
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
 
 }
