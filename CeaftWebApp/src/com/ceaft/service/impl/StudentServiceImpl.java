@@ -1,7 +1,7 @@
 package com.ceaft.service.impl;
 
-/*import javax.ejb.EJB;
-import javax.ejb.Stateless;*/
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dao.IStudentDAO;
@@ -9,10 +9,10 @@ import com.ceaft.dto.StudentDTO;
 import com.ceaft.model.Student;
 import com.ceaft.service.IStudentService;
 
-//@Stateless
+@Stateless
 public class StudentServiceImpl implements IStudentService{
 
-	//@EJB
+	@EJB
 	private IStudentDAO iStudentDAO;
 	
 	@Override

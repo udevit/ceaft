@@ -1,12 +1,12 @@
 package com.ceaft.dao.impl;
 
-//import javax.ejb.Stateless;
+import javax.ejb.Stateless;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dao.IStudentDAO;
 import com.ceaft.model.Student;
 
-//@Stateless
+@Stateless
 public class StudentDAOImpl implements IStudentDAO{
 
 	@Override

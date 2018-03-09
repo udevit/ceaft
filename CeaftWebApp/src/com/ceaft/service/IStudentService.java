@@ -1,11 +1,11 @@
 package com.ceaft.service;
 
-//import javax.ejb.Local;
+import javax.ejb.Local;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.StudentDTO;
 
-//@Local
+@Local
 public interface IStudentService {
 	StudentDTO register(String id) throws ResourceNotFoundException;
 }

@@ -43,9 +43,12 @@
 				<p:tabView dynamic="true">
 					<p:tab id="tab1" title="Asistencia">
 						<h:panelGrid columns="2" border="1">
-							<p:dataTable var="stdnt">
-								<p:column headerText="Matrícula">
-							        <h:outputText value="#{stdnt.id}" />
+							<p:dataTable var="stdnt" value="#{student.attendanceList}" emptyMessage="Sin registros que mostrar">
+								<p:column headerText="#">
+							        <h:outputText value="" />
+							    </p:column>
+							    <p:column headerText="Hora de Entrada">
+							        <h:outputText value="#{stdnt.arrivalTime}" />
 							    </p:column>
 							</p:dataTable>
 							<!-- <p:chart type="pie" model="#{student.pieModel}" style="width:400px;height:300px"/>-->

@@ -1,13 +1,18 @@
 package com.ceaft.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
-//import javax.ejb.EJB;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import org.primefaces.model.chart.PieChartModel;
 
 import com.ceaf.exception.ResourceNotFoundException;
+import com.ceaft.dto.AttendanceDTO;
 import com.ceaft.dto.StudentDTO;
 import com.ceaft.service.IStudentService;
 import com.ceaft.util.StringUtil;
@@ -25,11 +30,12 @@ public class StudentBean extends CeaftBaseController{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	//@EJB
+	@EJB
 	private IStudentService svc;
 	private String studentId;
 	private StudentDTO studentVO;
 	private PieChartModel pieModel;
+	private List<AttendanceDTO> attendanceList;
 	
 	/**
 	 * 
@@ -52,6 +58,13 @@ public class StudentBean extends CeaftBaseController{
          
         pieModel.setTitle("Historial de Asistencia");
         pieModel.setLegendPosition("w");
+        
+        attendanceList = new ArrayList<>();
+		attendanceList.add(new AttendanceDTO(new Date()));
+		attendanceList.add(new AttendanceDTO(new Date()));
+		attendanceList.add(new AttendanceDTO(new Date()));
+		attendanceList.add(new AttendanceDTO(new Date()));
+		attendanceList.add(new AttendanceDTO(new Date()));
     }
 	
 	/**
@@ -101,6 +114,20 @@ public class StudentBean extends CeaftBaseController{
 	 */
 	public void setPieModel(PieChartModel pieModel) {
 		this.pieModel = pieModel;
+	}
+
+	/**
+	 * @return the attendanceList
+	 */
+	public List<AttendanceDTO> getAttendanceList() {
+		return attendanceList;
+	}
+
+	/**
+	 * @param attendanceList the attendanceList to set
+	 */
+	public void setAttendanceList(List<AttendanceDTO> attendanceList) {
+		this.attendanceList = attendanceList;
 	}
 
 	/**
