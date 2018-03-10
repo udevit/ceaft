@@ -1,13 +1,13 @@
 package com.ceaft.model;
 
 import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +18,7 @@ public class Curso implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name="ID_CURSO")
 	private long id;
@@ -26,49 +26,87 @@ public class Curso implements Serializable{
 	@Column(name="DURACION")
 	private long duracion;
 	
+	@Column(name="NOMBRE")
+	private String nombre;
+	
+	@Column(name="DIAS_DE_CLASE")
+	private String diasClase;
+	
+	@Column(name="CLASE_X_SEMANA")
+	private long claseXSem;
+	
+	@Column(name="COSTO_QUINCENAL")
+	private Double costoQuin;
+	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "curso", cascade = CascadeType.ALL)
 	private Capacitacion capacitacion;
 	
-	/**
-	 * @return the id
-	 */
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Grupo grupo;
+
 	public long getId() {
 		return id;
 	}
-	
-	/**
-	 * @param id the id to set
-	 */
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	/**
-	 * @return the duracion
-	 */
+
 	public long getDuracion() {
 		return duracion;
 	}
-	
-	/**
-	 * @param duracion the duracion to set
-	 */
+
 	public void setDuracion(long duracion) {
 		this.duracion = duracion;
 	}
-	
-	/**
-	 * @return the capacitacion
-	 */
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDiasClase() {
+		return diasClase;
+	}
+
+	public void setDiasClase(String diasClase) {
+		this.diasClase = diasClase;
+	}
+
+	public long getClaseXSem() {
+		return claseXSem;
+	}
+
+	public void setClaseXSem(long claseXSem) {
+		this.claseXSem = claseXSem;
+	}
+
+	public Double getCostoQuin() {
+		return costoQuin;
+	}
+
+	public void setCostoQuin(Double costoQuin) {
+		this.costoQuin = costoQuin;
+	}
+
 	public Capacitacion getCapacitacion() {
 		return capacitacion;
 	}
-	
-	/**
-	 * @param capacitacion the capacitacion to set
-	 */
+
 	public void setCapacitacion(Capacitacion capacitacion) {
 		this.capacitacion = capacitacion;
 	}
 
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+	
 }

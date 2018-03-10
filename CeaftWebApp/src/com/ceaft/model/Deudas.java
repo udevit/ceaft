@@ -2,7 +2,6 @@ package com.ceaft.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +12,12 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="DEUDAS")
 public class Deudas implements Serializable {
-	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@NotNull
@@ -22,19 +25,19 @@ public class Deudas implements Serializable {
 	private long idDeuda;
 	
 	@Column(name="MATRICULA")
-	private String matricula;
+	private String matric;
 	
 	@Column(name="ADEUDO_TOTAL")
-	private BigDecimal adeudoTotal;
+	private BigDecimal adeudoTot;
 
 	@Column(name="MONTO_RECUPERADO")
-	private BigDecimal montoRecuperado;
+	private Double montoRecup;
 	
 	@Column(name="MONTO_CARGO_EXTRA")
-	private BigDecimal montoCargoExtra;
+	private Double montoExtra;
 	
 	@Column(name="FOLIO")
-	private int folio;
+	private long folio;
 
 	public long getIdDeuda() {
 		return idDeuda;
@@ -44,45 +47,44 @@ public class Deudas implements Serializable {
 		this.idDeuda = idDeuda;
 	}
 
-	public String getMatricula() {
-		return matricula;
+	public String getMatric() {
+		return matric;
 	}
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
+	public void setMatric(String matric) {
+		this.matric = matric;
 	}
 
-	public BigDecimal getAdeudoTotal() {
-		return adeudoTotal;
+	public BigDecimal getAdeudoTot() {
+		return adeudoTot;
 	}
 
-	public void setAdeudoTotal(BigDecimal adeudoTotal) {
-		this.adeudoTotal = adeudoTotal;
+	public void setAdeudoTot(BigDecimal adeudoTot) {
+		this.adeudoTot = adeudoTot;
 	}
 
-	public BigDecimal getMontoRecuperado() {
-		return montoRecuperado;
+	public Double getMontoRecup() {
+		return montoRecup;
 	}
 
-	public void setMontoRecuperado(BigDecimal montoRecuperado) {
-		this.montoRecuperado = montoRecuperado;
+	public void setMontoRecup(Double montoRecup) {
+		this.montoRecup = montoRecup;
 	}
 
-	public BigDecimal getMontoCargoExtra() {
-		return montoCargoExtra;
+	public Double getMontoExtra() {
+		return montoExtra;
 	}
 
-	public void setMontoCargoExtra(BigDecimal montoCargoExtra) {
-		this.montoCargoExtra = montoCargoExtra;
+	public void setMontoExtra(Double montoExtra) {
+		this.montoExtra = montoExtra;
 	}
 
-	public int getFolio() {
+	public long getFolio() {
 		return folio;
 	}
 
-	public void setFolio(int folio) {
+	public void setFolio(long folio) {
 		this.folio = folio;
 	}
-	
 	
 }
