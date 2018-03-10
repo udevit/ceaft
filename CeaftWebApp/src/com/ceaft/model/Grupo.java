@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -49,6 +50,18 @@ public class Grupo implements Serializable {
 	
 	@Column(name="AULA")
 	private String aula;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Alumno_Matriculado alumnoMatric;
+	
+	public Alumno_Matriculado getAlumnoMatric() {
+		return alumnoMatric;
+	}
+
+	public void setAlumnoMatric(Alumno_Matriculado alumnoMatric) {
+		this.alumnoMatric = alumnoMatric;
+	}
 
 	public long getIdGpo() {
 		return idGpo;

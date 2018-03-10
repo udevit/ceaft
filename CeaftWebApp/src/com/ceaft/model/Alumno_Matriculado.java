@@ -1,11 +1,15 @@
 package com.ceaft.model;
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -26,8 +30,18 @@ public class Alumno_Matriculado implements Serializable {
 	@Column(name="MATRICULA")
 	private String matric;
 	
-	@Column(name="GRUPO")
-	private long grupo;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "alumnoMatric", cascade = CascadeType.ALL)
+	private Grupo grupo;
+
+
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
 
 	public long getIdAlum() {
 		return idAlum;
@@ -43,14 +57,6 @@ public class Alumno_Matriculado implements Serializable {
 
 	public void setMatric(String matric) {
 		this.matric = matric;
-	}
-
-	public long getGrupo() {
-		return grupo;
-	}
-
-	public void setGrupo(long grupo) {
-		this.grupo = grupo;
 	}
 	
 }

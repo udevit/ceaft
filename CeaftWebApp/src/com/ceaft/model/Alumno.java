@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -38,6 +39,18 @@ public class Alumno implements Serializable {
 	
 	@Column(name="MATRICULA")
 	private String matric;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Asistencia asistencia;
+
+	public Asistencia getAsistencia() {
+		return asistencia;
+	}
+
+	public void setAsistencia(Asistencia asistencia) {
+		this.asistencia = asistencia;
+	}
 
 	public long getIdAlum() {
 		return idAlum;

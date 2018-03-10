@@ -2,11 +2,15 @@ package com.ceaft.model;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,8 +32,8 @@ public class Asistencia implements Serializable{
 	@Column(name="MATRICULA")
 	private String matric;
 	
-	@Column(name="ID_ALUMNO")
-	private long idAlum;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "asistencia", cascade = CascadeType.ALL)
+	private Alumno alumno;
 	
 	@Column(name="FECHA")
 	private Date fecha;
@@ -50,20 +54,20 @@ public class Asistencia implements Serializable{
 		this.matric = matric;
 	}
 
-	public long getIdAlum() {
-		return idAlum;
-	}
-
-	public void setIdAlum(long idAlum) {
-		this.idAlum = idAlum;
-	}
-
 	public Date getFecha() {
 		return fecha;
 	}
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 	
 }
