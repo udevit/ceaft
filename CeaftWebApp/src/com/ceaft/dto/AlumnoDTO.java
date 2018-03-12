@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.primefaces.model.chart.PieChartModel;
-
 /**
  * 
  * @author Gary
@@ -18,13 +16,15 @@ public class AlumnoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
+	private String photoName;
 	private String nombre;
 	private String nombreCurso;
 	private String nombreProfesor;
 	private String horario;
+	private String diasClase;
 	private List<AsistenciaDTO> asistencia;
 	private List<DeudaDTO> deuda;
-	private PieChartModel pieModel;
+	private List<HistoricoPieDTO> historicoPieData;
 
 	/**
 	 * 
@@ -55,6 +55,20 @@ public class AlumnoDTO implements Serializable{
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return the photoName
+	 */
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	/**
+	 * @param photoName the photoName to set
+	 */
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
 	}
 
 	/**
@@ -114,6 +128,20 @@ public class AlumnoDTO implements Serializable{
 	}
 
 	/**
+	 * @return the diasClase
+	 */
+	public String getDiasClase() {
+		return diasClase;
+	}
+
+	/**
+	 * @param diasClase the diasClase to set
+	 */
+	public void setDiasClase(String diasClase) {
+		this.diasClase = diasClase;
+	}
+
+	/**
 	 * @return the asistencia
 	 */
 	public List<AsistenciaDTO> getAsistencia() {
@@ -148,17 +176,20 @@ public class AlumnoDTO implements Serializable{
 	}
 
 	/**
-	 * @return the pieModel
+	 * @return the historicoPieData
 	 */
-	public PieChartModel getPieModel() {
-		return pieModel;
+	public List<HistoricoPieDTO> getHistoricoPieData() {
+		if(historicoPieData == null){
+			historicoPieData = new ArrayList<>();
+		}
+		return historicoPieData;
 	}
 
 	/**
-	 * @param pieModel the pieModel to set
+	 * @param historicoPieData the historicoPieData to set
 	 */
-	public void setPieModel(PieChartModel pieModel) {
-		this.pieModel = pieModel;
+	public void setHistoricoPieData(List<HistoricoPieDTO> historicoPieData) {
+		this.historicoPieData = historicoPieData;
 	}
 
 	@Override

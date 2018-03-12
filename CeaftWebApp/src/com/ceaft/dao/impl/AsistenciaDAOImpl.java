@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import com.ceaft.dao.IAsistenciaDAO;
+import com.ceaft.dto.HistoricoPieDTO;
 import com.ceaft.model.Asistencia;
 
 @Stateless
@@ -33,6 +34,20 @@ public class AsistenciaDAOImpl implements IAsistenciaDAO{
 		a.add(new Asistencia("MAT0001", new GregorianCalendar(2018, Calendar.MARCH, 5).getTime()));
 		a.add(new Asistencia("MAT0001", new GregorianCalendar(2018, Calendar.MARCH, 7).getTime()));
 		return a;
+	}
+
+	@Override
+	public List<HistoricoPieDTO> obtenerHistoricoPie(String id) {
+		//TODO remover cuando se consulte a la BD
+		List<HistoricoPieDTO> historico = new ArrayList<>();
+		historico.add(new HistoricoPieDTO("Lunes", 100));
+		historico.add(new HistoricoPieDTO("Martes", 81));
+		historico.add(new HistoricoPieDTO("Miércoles", 35));
+		historico.add(new HistoricoPieDTO("Jueves", 70));
+		historico.add(new HistoricoPieDTO("Viernes", 50));
+		historico.add(new HistoricoPieDTO("Sábado", 45));
+		historico.add(new HistoricoPieDTO("Domingo", 25));
+		return historico;
 	}
 
 }

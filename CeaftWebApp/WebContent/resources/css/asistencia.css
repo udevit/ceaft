@@ -42,6 +42,13 @@
    	width:99%;
 }
 
+.footerGeneral {
+	text-align: center;
+   	height:70px;
+   	width:99%;
+}
+
+
 .footerCeaft{
 	margin-top: 2.4em;
 	text-align: center;
@@ -72,12 +79,7 @@
   	font-family: Digital;
 }
 
-.pagado{
-	background-color: green;
-	color: white;
-}
-
 .debe{
-	background-color: red;
+	background-color: #4267b2;
 	color: white;
 }

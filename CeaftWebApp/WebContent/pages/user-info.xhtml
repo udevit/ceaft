@@ -20,7 +20,7 @@
 						    	</h:panelGrid>
 						    </f:facet>
 						    <h:panelGrid columns="2" cellpadding="10">
-						    	<h:graphicImage alt="User photo" value="/resources/images/man.png" width="170"/>
+						    	<p:graphicImage alt="User photo" value="#{student.photo}" width="170" />
 						    	<h:panelGroup>
 						    		<h:panelGrid columns="2" style="text-align: left">
 								    	<p:outputLabel value="Matrícula"/>
@@ -31,6 +31,8 @@
 								    	<p:inputText value="#{student.alumnoModel.nombreCurso}" readonly="true"/>
 								    	<p:outputLabel value="Horario"/>
 								    	<p:inputText value="#{student.alumnoModel.horario}" readonly="true"/>
+								    	<p:outputLabel value="Día de clase"/>
+								    	<p:inputText value="#{student.alumnoModel.diasClase}" readonly="true"/>
 								    	<p:outputLabel value="Profesor"/>
 								    	<p:inputText value="#{student.alumnoModel.nombreProfesor}" readonly="true"/>
 								    </h:panelGrid>
@@ -72,7 +74,7 @@
 								        <p:outputLabel value="En total hay #{fn:length(student.alumnoModel.asistencia)} registros."/>
 								    </f:facet>
 								</p:dataTable>
-								<p:chart type="pie" model="#{student.alumnoModel.pieModel}" style="width:400px;height:300px"/>
+								<p:chart type="pie" model="#{student.pieModel}" style="width:400px;height:300px"/>
 							</h:panelGrid>
 							<h:panelGrid columns="2">
 								<h:graphicImage alt="green-circle" value="/resources/images/green-circle.png" width="15"/>
@@ -87,7 +89,7 @@
 				            <p:dataTable var="deudas" rowIndexVar="row" value="#{student.alumnoModel.deuda}"
 								rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-								rowStyleClass="#{deudas.total eq deudas.montoRecuperado ? 'pagado' : 'debe'}"
+								rowStyleClass="#{deudas.total ne deudas.montoRecuperado ? 'debe' : null}"
 								paginatorPosition="bottom">
 								<f:facet name="header">
 							        <p:outputLabel value="Adeudos Recientes"/>
@@ -120,6 +122,14 @@
 				        </p:tab>
 				    </p:tabView>
 				</h:form>
+			</ui:define>
+			<ui:define name="footer">
+				<p:panel styleClass="footerGeneral">
+					<h:panelGrid width="100%" cellpadding="1">
+						<h:outputText styleClass="footerCeaft" value="CEAFT&#174; Centro de Aprendizaje y Formación para el Trabajo"/>
+						<h:outputText  styleClass="footerAddress" value="Plaza Capital, Regina 79, 1er piso, local 3 Ciudad de México"/>
+					</h:panelGrid>
+				</p:panel>
 			</ui:define>
 		</ui:composition>
 	</h:body>

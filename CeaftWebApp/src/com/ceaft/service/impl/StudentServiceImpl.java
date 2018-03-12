@@ -6,8 +6,6 @@ import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.primefaces.model.chart.PieChartModel;
-
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dao.IAdeudoDAO;
 import com.ceaft.dao.IAlumnoDAO;
@@ -16,6 +14,7 @@ import com.ceaft.dao.IAsistenciaDAO;
 import com.ceaft.dto.AlumnoDTO;
 import com.ceaft.dto.AsistenciaDTO;
 import com.ceaft.dto.DeudaDTO;
+import com.ceaft.dto.HistoricoPieDTO;
 import com.ceaft.model.Alumno;
 import com.ceaft.model.AlumnoMatriculado;
 import com.ceaft.model.Asistencia;
@@ -42,11 +41,13 @@ public class StudentServiceImpl implements IStudentService{
 		try{
 			AlumnoMatriculado alumnoMatriculado = iAlumnoMatriculadoDAO.buscarAlumno(id);
 			if(alumnoMatriculado != null){
-				Alumno alumno= iAlumnoDAO.buscarAlumno(alumnoMatriculado.getMatric());
+				Alumno alumno = iAlumnoDAO.buscarAlumno(alumnoMatriculado.getMatric());
 				AlumnoDTO alumnoDTO = new AlumnoDTO(id, alumno.getNom());
+				alumnoDTO.setPhotoName("IMG-201.png");
 				alumnoDTO.setNombreCurso(alumnoMatriculado.getGrupo().getCurso().getNombre());
 				alumnoDTO.setNombreProfesor(alumnoMatriculado.getGrupo().getProf());
 				alumnoDTO.setHorario(alumnoMatriculado.getGrupo().getHorario());
+				alumnoDTO.setDiasClase(alumnoMatriculado.getGrupo().getCurso().getDiasClase());
 				List<Asistencia> asistencias = iAsistenciaDAO.obtenerAsistencias(id);
 				String estados[] = {"green-circle.png", "yellow-circle.png", "red-circle.png"};
 				for(Asistencia attdnc : asistencias){
@@ -58,18 +59,12 @@ public class StudentServiceImpl implements IStudentService{
 						deuda.getMontoRecup(), deuda.getMontoExtra()));
 				}
 				
-				PieChartModel pieModel = new PieChartModel();
-				pieModel.set("Lunes", 540);
-		        pieModel.set("Martes", 325);
-		        pieModel.set("Miercoles", 702);
-		        pieModel.set("Jueves", 421);
-		        pieModel.set("Viernes", 150);
-		        pieModel.set("Sabado", 289);
-		        pieModel.set("Domingo", 387);
-		         
-		        pieModel.setTitle("Historial de Asistencia");
-		        pieModel.setLegendPosition("w");
-				alumnoDTO.setPieModel(pieModel);
+				List<HistoricoPieDTO> historicoPie = iAsistenciaDAO.obtenerHistoricoPie(id);
+				for(HistoricoPieDTO historico :  historicoPie){
+					alumnoDTO.getHistoricoPieData().add(new HistoricoPieDTO(historico.getDia(), historico.getValor()));
+				}
+				
+				
 				return alumnoDTO;
 			}else{
 				throw new ResourceNotFoundException("<< Estudiante no encontrado >>");

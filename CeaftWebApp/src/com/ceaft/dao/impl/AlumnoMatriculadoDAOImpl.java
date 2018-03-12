@@ -22,6 +22,7 @@ public class AlumnoMatriculadoDAOImpl implements IAlumnoMatriculadoDAO{
 		grupo.setProf("Joe C Enriquez Fernandez");
 		Curso curso = new Curso();
 		curso.setNombre("Programación");
+		curso.setDiasClase("Lunes - Viernes");
 		grupo.setCurso(curso);
 		a.setGrupo(grupo);
 		return a;
