@@ -23,6 +23,7 @@ public class AlumnoDTO implements Serializable{
 	private String nombreProfesor;
 	private String horario;
 	private List<AsistenciaDTO> asistencia;
+	private List<DeudaDTO> deuda;
 	private PieChartModel pieModel;
 
 	/**
@@ -127,6 +128,23 @@ public class AlumnoDTO implements Serializable{
 	 */
 	public void setAsistencia(List<AsistenciaDTO> asistencia) {
 		this.asistencia = asistencia;
+	}
+
+	/**
+	 * @return the deuda
+	 */
+	public List<DeudaDTO> getDeuda() {
+		if(deuda == null){
+			deuda = new ArrayList<>();
+		}
+		return deuda;
+	}
+
+	/**
+	 * @param deuda the deuda to set
+	 */
+	public void setDeuda(List<DeudaDTO> deuda) {
+		this.deuda = deuda;
 	}
 
 	/**

@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:p="http://primefaces.org/ui" 
 	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:body>
 		<ui:composition template="../templates/ceaft-basic-template.xhtml">
@@ -40,13 +41,17 @@
 				</p:panel>
 			</ui:define>
 			<ui:define name="content">
-				<h:form>
-					<p:tabView dynamic="true">
+				<h:form id="formTab">
+					<p:tabView id="myTabView" dynamic="true">
 						<p:tab id="tab1" title="Asistencia">
 							<h:panelGrid columns="2">
 								<p:dataTable var="stdnt" rowIndexVar="row" value="#{student.alumnoModel.asistencia}" 
 									rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
-									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+									paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+									paginatorPosition="bottom">
+									<f:facet name="header">
+								        <p:outputLabel value="Historial de Asistencia"/>
+								    </f:facet>
 									<p:column headerText="#" style="text-align: center">
 								        <h:outputText value="#{row + 1}" />
 								    </p:column>
@@ -61,8 +66,11 @@
 								        </h:outputText>
 								    </p:column>
 								    <p:column headerText="Estado" style="text-align: center">
-								        <h:graphicImage alt="status" value="/resources/images/#{stdnt.estado}" width="30"/>
+								        <h:graphicImage alt="status" value="/resources/images/#{stdnt.estado}" width="20"/>
 								    </p:column>
+								    <f:facet name="footer">
+								        <p:outputLabel value="En total hay #{fn:length(student.alumnoModel.asistencia)} registros."/>
+								    </f:facet>
 								</p:dataTable>
 								<p:chart type="pie" model="#{student.alumnoModel.pieModel}" style="width:400px;height:300px"/>
 							</h:panelGrid>
@@ -76,7 +84,39 @@
 							</h:panelGrid>
 						</p:tab>
 				        <p:tab id="tab2" title="Adeudos">
-				            Data 2
+				            <p:dataTable var="deudas" rowIndexVar="row" value="#{student.alumnoModel.deuda}"
+								rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+								rowStyleClass="#{deudas.total eq deudas.montoRecuperado ? 'pagado' : 'debe'}"
+								paginatorPosition="bottom">
+								<f:facet name="header">
+							        <p:outputLabel value="Adeudos Recientes"/>
+							    </f:facet>
+								<p:column headerText="#" style="text-align: center">
+							        <h:outputText value="#{row + 1}" />
+							    </p:column>
+							     <p:column headerText="Folio">
+							        <h:outputText value="#{deudas.folio}"/>
+							    </p:column>
+							    <p:column headerText="Total">
+							        <h:outputText value="#{deudas.total}">
+							        	<f:convertNumber type="currency" currencySymbol="$"/>
+							        </h:outputText>
+							    </p:column>
+							    <p:column headerText="Monto Recuperado">
+							        <h:outputText value="#{deudas.montoRecuperado}">
+							        	<f:convertNumber type="currency" currencySymbol="$"/>
+							        </h:outputText>
+							    </p:column>
+							    <p:column headerText="Monto Extra">
+							        <h:outputText value="#{deudas.montoExtra}">
+							        	<f:convertNumber type="currency" currencySymbol="$"/>
+							        </h:outputText>
+							    </p:column>
+							    <f:facet name="footer">
+								        <p:outputLabel value="En total hay #{fn:length(student.alumnoModel.deuda)} registros."/>
+								    </f:facet>
+							</p:dataTable>
 				        </p:tab>
 				    </p:tabView>
 				</h:form>

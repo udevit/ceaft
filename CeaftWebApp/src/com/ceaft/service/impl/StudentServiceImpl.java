@@ -9,14 +9,17 @@ import javax.ejb.Stateless;
 import org.primefaces.model.chart.PieChartModel;
 
 import com.ceaf.exception.ResourceNotFoundException;
+import com.ceaft.dao.IAdeudoDAO;
 import com.ceaft.dao.IAlumnoDAO;
 import com.ceaft.dao.IAlumnoMatriculadoDAO;
 import com.ceaft.dao.IAsistenciaDAO;
 import com.ceaft.dto.AlumnoDTO;
 import com.ceaft.dto.AsistenciaDTO;
+import com.ceaft.dto.DeudaDTO;
 import com.ceaft.model.Alumno;
 import com.ceaft.model.AlumnoMatriculado;
 import com.ceaft.model.Asistencia;
+import com.ceaft.model.Deuda;
 import com.ceaft.service.IStudentService;
 
 @Stateless
@@ -30,6 +33,9 @@ public class StudentServiceImpl implements IStudentService{
 	
 	@EJB
 	private IAsistenciaDAO iAsistenciaDAO;
+	
+	@EJB
+	private IAdeudoDAO iAdeudoDAO;
 	
 	@Override
 	public AlumnoDTO register(String id) throws ResourceNotFoundException {
@@ -45,6 +51,11 @@ public class StudentServiceImpl implements IStudentService{
 				String estados[] = {"green-circle.png", "yellow-circle.png", "red-circle.png"};
 				for(Asistencia attdnc : asistencias){
 					alumnoDTO.getAsistencia().add(new AsistenciaDTO(attdnc.getFecha(), estados[new Random().nextInt(3)]));
+				}
+				List<Deuda> dedudas = iAdeudoDAO.obtenerDeudas(id);
+				for(Deuda deuda : dedudas){
+					alumnoDTO.getDeuda().add(new DeudaDTO(deuda.getFolio(), deuda.getAdeudoTot().doubleValue(), 
+						deuda.getMontoRecup(), deuda.getMontoExtra()));
 				}
 				
 				PieChartModel pieModel = new PieChartModel();

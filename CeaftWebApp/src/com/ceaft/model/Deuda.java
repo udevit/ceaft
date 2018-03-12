@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="DEUDAS")
-public class Deudas implements Serializable {
+public class Deuda implements Serializable {
 	
 	/**
 	 * 
