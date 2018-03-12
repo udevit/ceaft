@@ -108,7 +108,7 @@ public class StudentBean extends CeaftBaseController{
 	 * @return the photo
 	 */
 	public StreamedContent getPhoto() {
-		if(alumnoModel != null){
+		if(photo == null){
 			photo = getPhotoFromDisk(alumnoModel.getPhotoName());
 		}
 		return photo;
