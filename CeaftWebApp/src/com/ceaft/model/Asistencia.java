@@ -38,6 +38,23 @@ public class Asistencia implements Serializable{
 	@Column(name="FECHA")
 	private Date fecha;
 
+	/**
+	 * 
+	 */
+	public Asistencia(){
+		
+	}
+	
+	/**
+	 * 
+	 * @param matric
+	 * @param fecha
+	 */
+	public Asistencia(String matric, Date fecha){
+		this.matric = matric;
+		this.fecha = fecha;
+	}
+
 	public long getIdAsis() {
 		return idAsis;
 	}

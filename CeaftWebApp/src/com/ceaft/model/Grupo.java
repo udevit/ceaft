@@ -53,13 +53,13 @@ public class Grupo implements Serializable {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	private Alumno_Matriculado alumnoMatric;
+	private AlumnoMatriculado alumnoMatric;
 	
-	public Alumno_Matriculado getAlumnoMatric() {
+	public AlumnoMatriculado getAlumnoMatric() {
 		return alumnoMatric;
 	}
 
-	public void setAlumnoMatric(Alumno_Matriculado alumnoMatric) {
+	public void setAlumnoMatric(AlumnoMatriculado alumnoMatric) {
 		this.alumnoMatric = alumnoMatric;
 	}
 

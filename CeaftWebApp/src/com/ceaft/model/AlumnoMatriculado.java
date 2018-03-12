@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
-public class Alumno_Matriculado implements Serializable {
+public class AlumnoMatriculado implements Serializable {
 	/**
 	 * 
 	 */

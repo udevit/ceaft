@@ -23,15 +23,15 @@
 						    	<h:panelGroup>
 						    		<h:panelGrid columns="2" style="text-align: left">
 								    	<p:outputLabel value="Matrícula"/>
-								    	<p:inputText value="" readonly="true"/>
+								    	<p:inputText value="#{student.alumnoModel.id}" readonly="true"/>
 								    	<p:outputLabel value="Nombre"/>
-								    	<p:inputText value="" readonly="true"/>
+								    	<p:inputText value="#{student.alumnoModel.nombre}" readonly="true"/>
 								    	<p:outputLabel value="Curso"/>
-								    	<p:inputText value="" readonly="true"/>
+								    	<p:inputText value="#{student.alumnoModel.nombreCurso}" readonly="true"/>
 								    	<p:outputLabel value="Horario"/>
-								    	<p:inputText value="" readonly="true"/>
+								    	<p:inputText value="#{student.alumnoModel.horario}" readonly="true"/>
 								    	<p:outputLabel value="Profesor"/>
-								    	<p:inputText value="" readonly="true"/>
+								    	<p:inputText value="#{student.alumnoModel.nombreProfesor}" readonly="true"/>
 								    </h:panelGrid>
 							    </h:panelGroup>
 						    </h:panelGrid>
@@ -40,24 +40,46 @@
 				</p:panel>
 			</ui:define>
 			<ui:define name="content">
-				<p:tabView dynamic="true">
-					<p:tab id="tab1" title="Asistencia">
-						<h:panelGrid columns="2" border="1">
-							<p:dataTable var="stdnt" value="#{student.attendanceList}" emptyMessage="Sin registros que mostrar">
-								<p:column headerText="#">
-							        <h:outputText value="" />
-							    </p:column>
-							    <p:column headerText="Hora de Entrada">
-							        <h:outputText value="#{stdnt.arrivalTime}" />
-							    </p:column>
-							</p:dataTable>
-							<!-- <p:chart type="pie" model="#{student.pieModel}" style="width:400px;height:300px"/>-->
-						</h:panelGrid>
-					</p:tab>
-			        <p:tab id="tab2" title="Adeudos">
-			            Data 2
-			        </p:tab>
-			    </p:tabView>
+				<h:form>
+					<p:tabView dynamic="true">
+						<p:tab id="tab1" title="Asistencia">
+							<h:panelGrid columns="2">
+								<p:dataTable var="stdnt" rowIndexVar="row" value="#{student.alumnoModel.asistencia}" 
+									rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+									<p:column headerText="#" style="text-align: center">
+								        <h:outputText value="#{row + 1}" />
+								    </p:column>
+								    <p:column headerText="Fecha">
+								        <h:outputText value="#{stdnt.horaLlegada}">
+								        	<f:convertDateTime type="both" pattern="dd MMM 'de' yyyy"></f:convertDateTime>
+								        </h:outputText>
+								    </p:column>
+								    <p:column headerText="Llegada">
+								        <h:outputText value="#{stdnt.horaLlegada}">
+								        	<f:convertDateTime type="both" pattern="hh:mm:ss"></f:convertDateTime>
+								        </h:outputText>
+								    </p:column>
+								    <p:column headerText="Estado" style="text-align: center">
+								        <h:graphicImage alt="status" value="/resources/images/#{stdnt.estado}" width="30"/>
+								    </p:column>
+								</p:dataTable>
+								<p:chart type="pie" model="#{student.alumnoModel.pieModel}" style="width:400px;height:300px"/>
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:graphicImage alt="green-circle" value="/resources/images/green-circle.png" width="15"/>
+								<h:outputText value="A tiempo"/>
+								<h:graphicImage alt="yellow-circle" value="/resources/images/yellow-circle.png" width="15"/>
+								<h:outputText value="Retardo, más de 15 minutos"/>
+								<h:graphicImage alt="red-circle" value="/resources/images/red-circle.png" width="15"/>
+								<h:outputText value="Retardo, más de 30 minutos"/>
+							</h:panelGrid>
+						</p:tab>
+				        <p:tab id="tab2" title="Adeudos">
+				            Data 2
+				        </p:tab>
+				    </p:tabView>
+				</h:form>
 			</ui:define>
 		</ui:composition>
 	</h:body>
