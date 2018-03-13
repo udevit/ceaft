@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ceaft.controller.Sexo;
+
 /**
  * 
  * @author Gary
@@ -16,8 +18,9 @@ public class AlumnoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private String photoName;
+	private String nombreFoto;
 	private String nombre;
+	private Sexo sexo;
 	private String nombreCurso;
 	private String nombreProfesor;
 	private String horario;
@@ -58,17 +61,17 @@ public class AlumnoDTO implements Serializable{
 	}
 
 	/**
-	 * @return the photoName
+	 * @return the nombreFoto
 	 */
-	public String getPhotoName() {
-		return photoName;
+	public String getNombreFoto() {
+		return nombreFoto;
 	}
 
 	/**
-	 * @param photoName the photoName to set
+	 * @param nombreFoto the nombreFoto to set
 	 */
-	public void setPhotoName(String photoName) {
-		this.photoName = photoName;
+	public void setNombreFoto(String nombreFoto) {
+		this.nombreFoto = nombreFoto;
 	}
 
 	/**
@@ -83,6 +86,20 @@ public class AlumnoDTO implements Serializable{
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the sexo
+	 */
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	/**
+	 * @param sexo the sexo to set
+	 */
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
 	}
 
 	/**

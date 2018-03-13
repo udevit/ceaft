@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.ceaf.exception.ResourceNotFoundException;
+import com.ceaft.controller.Sexo;
 import com.ceaft.dao.IAdeudoDAO;
 import com.ceaft.dao.IAlumnoDAO;
 import com.ceaft.dao.IAlumnoMatriculadoDAO;
@@ -43,7 +44,9 @@ public class StudentServiceImpl implements IStudentService{
 			if(alumnoMatriculado != null){
 				Alumno alumno = iAlumnoDAO.buscarAlumno(alumnoMatriculado.getMatric());
 				AlumnoDTO alumnoDTO = new AlumnoDTO(id, alumno.getNom());
-				alumnoDTO.setPhotoName("IMG-201.png");
+				alumnoDTO.setSexo(Sexo.MASCULINO);
+				String photoTmp[] = {"IMG-201.png", "udev-logo.jpg"};
+				alumnoDTO.setNombreFoto(photoTmp[new Random().nextInt(2)]);
 				alumnoDTO.setNombreCurso(alumnoMatriculado.getGrupo().getCurso().getNombre());
 				alumnoDTO.setNombreProfesor(alumnoMatriculado.getGrupo().getProf());
 				alumnoDTO.setHorario(alumnoMatriculado.getGrupo().getHorario());
@@ -65,7 +68,6 @@ public class StudentServiceImpl implements IStudentService{
 				for(HistoricoPieDTO historico :  historicoPie){
 					alumnoDTO.getHistoricoPieData().add(new HistoricoPieDTO(historico.getDia(), historico.getValor()));
 				}
-				
 				
 				return alumnoDTO;
 			}else{

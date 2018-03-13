@@ -23,14 +23,10 @@ import com.ceaft.dto.HistoricoPieDTO;
 import com.ceaft.service.IStudentService;
 import com.ceaft.util.StringUtil;
 
-/**
- * 
- * @author Gary
- *
- */
-@ManagedBean(name="student")
+@ManagedBean
 @SessionScoped
-public class StudentBean extends CeaftBaseController{
+public class AlumnoBean extends CeaftBaseController{
+
 	/**
 	 * 
 	 */
@@ -38,15 +34,15 @@ public class StudentBean extends CeaftBaseController{
 	
 	@EJB
 	private IStudentService svc;
-	private String studentId;
+	private String alumnoId;
 	private AlumnoDTO alumnoModel;
 	private PieChartModel pieModel;
-	private StreamedContent photo;
+	private StreamedContent foto;
 	
 	/**
 	 * 
 	 */
-	public StudentBean(){
+	public AlumnoBean(){
 		
 	}
 	
@@ -61,21 +57,21 @@ public class StudentBean extends CeaftBaseController{
 	public IStudentService getSvc() {
 		return svc;
 	}
-
-	/**
-	 * @return the studentId
-	 */
-	public String getStudentId() {
-		return studentId;
-	}
-
-	/**
-	 * @param studentId the studentId to set
-	 */
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
-	}
 	
+	/**
+	 * @return the alumnoId
+	 */
+	public String getAlumnoId() {
+		return alumnoId;
+	}
+
+	/**
+	 * @param alumnoId the alumnoId to set
+	 */
+	public void setAlumnoId(String alumnoId) {
+		this.alumnoId = alumnoId;
+	}
+
 	/**
 	 * @return the alumnoModel
 	 */
@@ -105,29 +101,29 @@ public class StudentBean extends CeaftBaseController{
 	}
 
 	/**
-	 * @return the photo
+	 * @return the foto
 	 */
-	public StreamedContent getPhoto() {
-		if(photo == null){
-			photo = getPhotoFromDisk(alumnoModel.getPhotoName());
+	public StreamedContent getFoto() {
+		if(foto == null){
+			foto = obtenerFotoAlumno(alumnoModel);
 		}
-		return photo;
+		return foto;
 	}
 
 	/**
-	 * @param photo the photo to set
+	 * @param foto the foto to set
 	 */
-	public void setPhoto(StreamedContent photo) {
-		this.photo = photo;
+	public void setFoto(StreamedContent foto) {
+		this.foto = foto;
 	}
 
 	/**
 	 * 
 	 */
-	public String register(){
+	public String registrar(){
 		try{
-			if(!StringUtil.isEmpty(studentId)){
-				alumnoModel = svc.register(studentId);
+			if(!StringUtil.isEmpty(alumnoId)){
+				alumnoModel = svc.register(alumnoId);
 				
 				//creating pie model
 				pieModel = new PieChartModel();
@@ -161,12 +157,11 @@ public class StudentBean extends CeaftBaseController{
 	
 	/**
 	 * 
-	 * @param photoName
+	 * @param alumnoModel
 	 * @return
-	 * @throws FileNotFoundException
 	 */
-	private StreamedContent getPhotoFromDisk(String photoName){
-		String path = "C:/ceaft/photo/" + photoName;
+	private StreamedContent obtenerFotoAlumno(AlumnoDTO alumnoModel){
+		String path = "C:/ceaft/photo/" + alumnoModel.getNombreFoto();
 		File file = new File(path);
 		StreamedContent photo =  null;
 		try{
@@ -174,12 +169,12 @@ public class StudentBean extends CeaftBaseController{
 				InputStream input = new FileInputStream(file);
 				photo = new DefaultStreamedContent(input, Files.probeContentType(Paths.get(path)));
 			}else{
-				photo = createDefaultContent();
+				photo = crearFotoDefault(alumnoModel.getSexo());
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 			try{
-				photo = createDefaultContent();
+				photo = crearFotoDefault(alumnoModel.getSexo());
 			}catch(FileNotFoundException ex){
 				ex.printStackTrace();
 			}
@@ -190,14 +185,15 @@ public class StudentBean extends CeaftBaseController{
 	
 	/**
 	 * 
+	 * @param sexo
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	private StreamedContent createDefaultContent() throws FileNotFoundException{
-		String path = "/resources/images/man.png";
+	private StreamedContent crearFotoDefault(Sexo sexo) throws FileNotFoundException{
+		String path = "/resources/images/" + (Sexo.MASCULINO.equals(sexo) ? "man.png" : "woman.png");
 		String realPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(path);
 		InputStream input = new FileInputStream(new File(realPath));
 		return  new DefaultStreamedContent(input, "image/png");
 	}
-	
+
 }

@@ -20,10 +20,10 @@
 					 <p:panel>
 					 	<h:panelGrid>
 					 		<h:form>
-					 			<p:remoteCommand name="register" action="#{student.register}"
+					 			<p:remoteCommand name="register" action="#{alumnoBean.registrar}"
 					 				onstart="PF('registeringDialog').show();" oncomplete="PF('registeringDialog').hide();"
 					 				onerror="PF('registeringDialog').hide();"/>
-					 			<p:inputText id="userId" value="#{student.studentId}"
+					 			<p:inputText id="userId" value="#{alumnoBean.alumnoId}"
 						 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
 						 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
 						 	</h:form>

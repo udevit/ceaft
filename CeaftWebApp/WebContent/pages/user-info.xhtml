@@ -20,21 +20,21 @@
 						    	</h:panelGrid>
 						    </f:facet>
 						    <h:panelGrid columns="2" cellpadding="10">
-						    	<p:graphicImage alt="User photo" value="#{student.photo}" width="170" cache="false"/>
+						    	<p:graphicImage alt="User photo" value="#{alumnoBean.foto}" width="170" cache="false"/>
 						    	<h:panelGroup>
 						    		<h:panelGrid columns="2" style="text-align: left">
 								    	<p:outputLabel value="Matrícula"/>
-								    	<p:inputText value="#{student.alumnoModel.id}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.id}" readonly="true"/>
 								    	<p:outputLabel value="Nombre"/>
-								    	<p:inputText value="#{student.alumnoModel.nombre}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.nombre}" readonly="true"/>
 								    	<p:outputLabel value="Curso"/>
-								    	<p:inputText value="#{student.alumnoModel.nombreCurso}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.nombreCurso}" readonly="true"/>
 								    	<p:outputLabel value="Horario"/>
-								    	<p:inputText value="#{student.alumnoModel.horario}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.horario}" readonly="true"/>
 								    	<p:outputLabel value="Día de clase"/>
-								    	<p:inputText value="#{student.alumnoModel.diasClase}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.diasClase}" readonly="true"/>
 								    	<p:outputLabel value="Profesor"/>
-								    	<p:inputText value="#{student.alumnoModel.nombreProfesor}" readonly="true"/>
+								    	<p:inputText value="#{alumnoBean.alumnoModel.nombreProfesor}" readonly="true"/>
 								    </h:panelGrid>
 							    </h:panelGroup>
 						    </h:panelGrid>
@@ -47,7 +47,7 @@
 					<p:tabView id="myTabView" dynamic="true">
 						<p:tab id="tab1" title="Asistencia">
 							<h:panelGrid columns="2">
-								<p:dataTable var="stdnt" rowIndexVar="row" value="#{student.alumnoModel.asistencia}" 
+								<p:dataTable var="stdnt" rowIndexVar="row" value="#{alumnoBean.alumnoModel.asistencia}" 
 									rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
 									paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 									paginatorPosition="bottom">
@@ -71,10 +71,10 @@
 								        <h:graphicImage alt="status" value="/resources/images/#{stdnt.estado}" width="20"/>
 								    </p:column>
 								    <f:facet name="footer">
-								        <p:outputLabel value="En total hay #{fn:length(student.alumnoModel.asistencia)} registros."/>
+								        <p:outputLabel value="En total hay #{fn:length(alumnoBean.alumnoModel.asistencia)} registros."/>
 								    </f:facet>
 								</p:dataTable>
-								<p:chart type="pie" model="#{student.pieModel}" style="width:400px;height:300px"/>
+								<p:chart type="pie" model="#{alumnoBean.pieModel}" style="width:400px;height:300px"/>
 							</h:panelGrid>
 							<h:panelGrid columns="2">
 								<h:graphicImage alt="green-circle" value="/resources/images/green-circle.png" width="15"/>
@@ -86,7 +86,7 @@
 							</h:panelGrid>
 						</p:tab>
 				        <p:tab id="tab2" title="Adeudos">
-				            <p:dataTable var="deudas" rowIndexVar="row" value="#{student.alumnoModel.deuda}"
+				            <p:dataTable var="deudas" rowIndexVar="row" value="#{alumnoBean.alumnoModel.deuda}"
 								rows="5" paginator="true" rowsPerPageTemplate="5,10,15" emptyMessage="Sin registros que mostrar"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 								rowStyleClass="#{deudas.total ne deudas.montoRecuperado ? 'debe' : null}"
@@ -116,7 +116,7 @@
 							        </h:outputText>
 							    </p:column>
 							    <f:facet name="footer">
-								        <p:outputLabel value="En total hay #{fn:length(student.alumnoModel.deuda)} registros."/>
+								        <p:outputLabel value="En total hay #{fn:length(alumnoBean.alumnoModel.deuda)} registros."/>
 								    </f:facet>
 							</p:dataTable>
 				        </p:tab>
