@@ -8,16 +8,6 @@
 	width: 300px;
 }
 
-.dialogHeaderColumn1{
-	width: 10%;
-    text-align: left;
-}
-
-.dialogHeaderColumn2{
-	width: 90%;
-    text-align: left;
-}
-
 .dialogFooter{
 	width: 17%;
     text-align: right;

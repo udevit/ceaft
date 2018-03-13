@@ -12,7 +12,7 @@
 				<p:dialog widgetVar="userDialog" visible="true" closable="false" 
 					resizable="false" responsive="true">
 					<f:facet name="header">
-						<h:panelGrid columns="2" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+						<h:panelGrid columns="2" width="100%">
 				    		<h:graphicImage alt="User logo" value="/resources/images/user-header.png" width="40"/>
 				    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}"/>
 				    	</h:panelGrid>
@@ -39,8 +39,8 @@
 				<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog"
 					onHide="PF('userDialog').show();" focus="aceptar">
 					<f:facet name="header">
-						<h:panelGrid columns="2" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
-				    		<h:graphicImage alt="Home logo" value="/resources/images/home.png" width="20"/>
+						<h:panelGrid columns="2" width="100%">
+				    		<h:graphicImage alt="Home logo" value="/resources/images/home.png" width="30"/>
 				    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}"/>
 				    	</h:panelGrid>
 				    </f:facet>
