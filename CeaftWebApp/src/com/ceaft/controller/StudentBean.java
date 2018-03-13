@@ -134,6 +134,8 @@ public class StudentBean extends CeaftBaseController{
 				for(HistoricoPieDTO pieData : alumnoModel.getHistoricoPieData()){
 					pieModel.set(pieData.getDia(), pieData.getValor());
 				}
+				pieModel.setTitle("Historial de Asistencia");
+		        pieModel.setLegendPosition("w");
 				return "info";
 			}else{
 				//show an error
