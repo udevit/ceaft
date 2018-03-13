@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.ceaft.dao.IAdeudoDAO;
 import com.ceaft.model.Deuda;
 
 @Stateless
 public class AdeudoDAOImpl implements IAdeudoDAO{
-
+	
+	@PersistenceContext(unitName = "CeaftPersistenceUnit")
+    private EntityManager entityManager;
+	
 	@Override
 	public List<Deuda> obtenerDeudas(String id) {
 		List<Deuda> deudas = new ArrayList<>();

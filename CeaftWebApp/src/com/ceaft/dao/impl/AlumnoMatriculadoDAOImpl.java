@@ -1,6 +1,8 @@
 package com.ceaft.dao.impl;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dao.IAlumnoMatriculadoDAO;
@@ -10,7 +12,10 @@ import com.ceaft.model.Grupo;
 
 @Stateless
 public class AlumnoMatriculadoDAOImpl implements IAlumnoMatriculadoDAO{
-
+	
+	@PersistenceContext(unitName = "CeaftPersistenceUnit")
+    private EntityManager entityManager;
+	
 	@Override
 	public AlumnoMatriculado buscarAlumno(String id) throws ResourceNotFoundException {
 		//TODO remover cuando se consulte a la BD

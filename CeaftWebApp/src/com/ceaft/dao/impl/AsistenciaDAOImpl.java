@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.ceaft.dao.IAsistenciaDAO;
 import com.ceaft.dto.HistoricoPieDTO;
@@ -15,6 +17,9 @@ import com.ceaft.model.Asistencia;
 @Stateless
 public class AsistenciaDAOImpl implements IAsistenciaDAO{
 
+	@PersistenceContext(unitName = "CeaftPersistenceUnit")
+    private EntityManager entityManager;
+	
 	@Override
 	public List<Asistencia> obtenerAsistencias(String id) {
 		//TODO remover cuando se consulte a la BD

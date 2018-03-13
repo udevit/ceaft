@@ -49,7 +49,9 @@ public class StudentServiceImpl implements IStudentService{
 				alumnoDTO.setHorario(alumnoMatriculado.getGrupo().getHorario());
 				alumnoDTO.setDiasClase(alumnoMatriculado.getGrupo().getCurso().getDiasClase());
 				List<Asistencia> asistencias = iAsistenciaDAO.obtenerAsistencias(id);
+				//TODO remover cuando se tenga la funcionalidad
 				String estados[] = {"green-circle.png", "yellow-circle.png", "red-circle.png"};
+				//
 				for(Asistencia attdnc : asistencias){
 					alumnoDTO.getAsistencia().add(new AsistenciaDTO(attdnc.getFecha(), estados[new Random().nextInt(3)]));
 				}
