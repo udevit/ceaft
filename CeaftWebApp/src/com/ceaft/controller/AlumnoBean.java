@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -20,6 +21,7 @@ import org.primefaces.model.chart.PieChartModel;
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.AlumnoDTO;
 import com.ceaft.dto.HistoricoPieDTO;
+import com.ceaft.enums.Sexo;
 import com.ceaft.service.IStudentService;
 import com.ceaft.util.StringUtil;
 
@@ -38,6 +40,8 @@ public class AlumnoBean extends CeaftBaseController{
 	private AlumnoDTO alumnoModel;
 	private PieChartModel pieModel;
 	private StreamedContent foto;
+	@ManagedProperty(value="#{messageBean}")
+	private MessageBean message;
 	
 	/**
 	 * 
@@ -118,6 +122,20 @@ public class AlumnoBean extends CeaftBaseController{
 	}
 
 	/**
+	 * @return the message
+	 */
+	public MessageBean getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(MessageBean message) {
+		this.message = message;
+	}
+
+	/**
 	 * 
 	 */
 	public String registrar(){
@@ -135,22 +153,22 @@ public class AlumnoBean extends CeaftBaseController{
 				return "info";
 			}else{
 				//show an error
-				addRequestParameter("logo", "info.png");
-				addRequestParameter("message", "Favor de ingresar la matrícula del alumno.");
-				hideWindowDialog("userDialog");
+				message.setIcon("info.png");
+				message.setMessage("Favor de ingresar la matrícula del alumno.");
 				showWindowDialog("infoMessageDialog");
 			}
 		}catch(ResourceNotFoundException e){
 			//show an error message
 			e.printStackTrace();
-			addRequestParameter("logo", "warning.png");
-			addRequestParameter("message", "Favor de ingresar la matrícula del alumno.");
-			hideWindowDialog("userDialog");
+			message.setIcon("warning.png");
+			message.setMessage("El alumno ingreado no se encuentra matriculado.");
 			showWindowDialog("infoMessageDialog");
 		}catch (Exception e) {
 			//show an error
 			e.printStackTrace();
-			printErrorMessage("Ceaft Web App", "Sistema no disponible por el momento. Si el error persiste contacte al administrador.");
+			message.setIcon("error.png");
+			message.setMessage("Sistema no disponible por el momento. Si el error persiste contacte al administrador.");
+			showWindowDialog("infoMessageDialog");
 		}
 		return "";
 	}

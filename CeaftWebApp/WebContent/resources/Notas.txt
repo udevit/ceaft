@@ -1,1 +1,4 @@
 http://www.vogella.com/tutorials/JavaPersistenceAPI/article.html
+
+
+https://o7planning.org/en/11071/create-a-simple-login-application-and-secure-pages-with-java-servlet-filter

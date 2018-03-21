@@ -21,7 +21,7 @@
 					 	<h:panelGrid>
 					 		<h:form>
 					 			<p:remoteCommand name="register" action="#{alumnoBean.registrar}"
-					 				onstart="PF('registeringDialog').show();" oncomplete="PF('registeringDialog').hide();"
+					 				onstart="PF('registeringDialog').show();" oncomplete="PF('registeringDialog').hide();" update="panelInfoMsg"
 					 				onerror="PF('registeringDialog').hide();"/>
 					 			<p:inputText id="userId" value="#{alumnoBean.alumnoId}"
 						 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
@@ -37,7 +37,7 @@
 				</p:dialog>
 				
 				<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog"
-					onHide="PF('userDialog').show();" focus="aceptar">
+					onHide="PF('userDialog').show();">
 					<f:facet name="header">
 						<h:panelGrid columns="2" width="100%">
 				    		<h:graphicImage alt="Home logo" value="/resources/images/home.png" width="30"/>
@@ -45,12 +45,12 @@
 				    	</h:panelGrid>
 				    </f:facet>
 					 <p:panel>
-					 	<h:panelGrid columns="2">
-					 		<h:graphicImage alt="Info logo" value="/resources/images/info.png" width="100"/>
-					 		<h:outputText value="Mensaje"/>
+					 	<h:panelGrid columns="2" id="panelInfoMsg">
+					 		<h:graphicImage alt="Info logo" value="/resources/images/#{messageBean.icon}" width="100"/>
+					 		<h:outputText value="#{messageBean.message}"/>
 					 	</h:panelGrid>
 					 	<h:panelGrid width="100%" style="text-align: center">
-					 		<p:commandButton id="aceptar" value="Aceptar" style="width: 300px"
+					 		<p:commandButton value="Aceptar" style="width: 300px"
 					 			onclick="PF('infoMessageDialog').hide();" oncomplete="PF('userDialog').show();"/>
 					 	</h:panelGrid>
 					 </p:panel>

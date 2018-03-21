@@ -1,4 +1,4 @@
-package com.ceaft.controller;
+package com.ceaft.enums;
 
 public enum Sexo {
 	MASCULINO, FEMENINO

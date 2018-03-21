@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	
+
 	<display-name>CeaftWebApp</display-name>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
@@ -14,7 +14,7 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-	
+
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -35,5 +35,56 @@
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>client</param-value>
 	</context-param>
+	
+	<context-param>
+    	<param-name>primefaces.FONT_AWESOME</param-name>
+    	<param-value>true</param-value>
+	</context-param>
+	
+	<!--
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>admin</web-resource-name>
+			<url-pattern>/pages/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>user</web-resource-name>
+			<url-pattern>/pages/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+	</security-constraint>
+	 -->
+	 
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.jsf</form-login-page>
+			<form-error-page>/error.jsf</form-error-page>
+		</form-login-config>
+	</login-config>
 
+	<security-role>
+		<description>Role Administrador, acceso de super usuario.</description>
+		<role-name>admin</role-name>
+	</security-role>
+	
+	<security-role>
+		<description>Role User, acceso de usuario.</description>
+		<role-name>user</role-name>
+	</security-role>
+	 
 </web-app>

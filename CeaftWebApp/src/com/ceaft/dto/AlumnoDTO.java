@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ceaft.controller.Sexo;
+import com.ceaft.enums.Sexo;
 
 /**
  * 

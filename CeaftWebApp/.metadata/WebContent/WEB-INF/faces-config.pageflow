@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15197008767390" configfile="/CeaftWebApp/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15197008767390" configfile="/CeaftWebApp/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/asistencia.xhtml" x="122" y="178" id="pf15216461362000" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf15216461362011" path="/pages/asistencia.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/user-info.xhtml" x="338" y="178" id="pf15216461362012" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf15216461362011" path="/pages/user-info.xhtml"/>
+  <links id="pf15216461362011" target="pf15216461362012" source="pf15216461362000" outcome="info"/>
+</pageflow:Pageflow>

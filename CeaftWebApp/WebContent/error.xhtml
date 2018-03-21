@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:body>
+		<ui:composition template="./templates/ceaft-basic-template.xhtml">
+			<ui:define name="content">
+				<p:dialog resizable="false" responsive="true" widgetVar="infoMessageDialog" closable="false" visible="true">
+					<f:facet name="header">
+						<h:panelGrid columns="2" width="100%">
+				    		<h:graphicImage alt="Home logo" value="/resources/images/home.png" width="30"/>
+				    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.title']}"/>
+				    	</h:panelGrid>
+				    </f:facet>
+					 <p:panel>
+					 	<h:panelGrid columns="2" width="600">
+					 		<h:graphicImage alt="Error logo" value="/resources/images/error.png" width="100"/>
+					 		<h:outputText value="Por favor ingrese el usuario y contraseña que está autorizado para accedera esta aplicación."/>
+					 	</h:panelGrid>
+					 	<h:panelGrid width="100%" style="text-align: center">
+					 		<p:link outcome="/login" value="Regresar a la página de Inicio"/>
+					 	</h:panelGrid>
+					 </p:panel>
+					 <f:facet name="footer">
+					 	<h:panelGrid columnClasses="dialogFooter">
+				    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
+				    	</h:panelGrid>
+					 </f:facet>
+				</p:dialog>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

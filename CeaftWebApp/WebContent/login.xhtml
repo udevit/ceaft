@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:body>
+		<ui:composition template="./templates/ceaft-basic-template.xhtml">
+			<ui:define name="content">
+				
+				<p:dialog widgetVar="loginDialog" visible="true" closable="false" 
+					resizable="false" responsive="true" width="400">
+					<f:facet name="header">
+						<h:panelGrid columns="2" width="100%">
+				    		<h:graphicImage alt="User logo" value="/resources/images/login-icon.png" width="40"/>
+				    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.login.title']}"/>
+				    	</h:panelGrid>
+				    </f:facet>
+					 <p:panel>
+					 	<h:form id="loginForm" onsubmit="this.action='#{request.contextPath}/j_security_check';">
+						 	<h:panelGrid columns="2" cellspacing="11" width="100%">
+						 		<p:outputLabel styleClass="fa fa-user"/>
+						 		 <input type="text" name="j_username" placeholder="Ingrese su usuario" size="24"
+						 		 	class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all"/>
+						 		<p:outputLabel styleClass="fa fa-key"/>
+						 		<input type="password" name="j_password" placeholder="Ingrese su contraseña" size="24"
+						 			class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"/>
+						 	</h:panelGrid>
+						 	<h:panelGrid cellspacing="11" width="100%" style="text-align: right">
+						 		<p:commandButton value="Entrar" ajax="false"/>
+						 	</h:panelGrid>
+						 </h:form>
+					 </p:panel>
+					 <f:facet name="footer">
+					 	<h:panelGrid columnClasses="dialogFooter">
+				    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
+				    	</h:panelGrid>
+					 </f:facet>
+				</p:dialog>
+				
+				<p:dialog resizable="false" responsive="true" widgetVar="authenticatingDialog" 
+					closable="false" modal="true">
+					<f:facet name="header">
+						Autenticando...
+				    </f:facet>
+				    <h:panelGrid width="100%" style="text-align: center">
+						<h:graphicImage alt="authenticating" value="/resources/images/loading.gif" width="20"/>
+					</h:panelGrid>
+				</p:dialog>
+		
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

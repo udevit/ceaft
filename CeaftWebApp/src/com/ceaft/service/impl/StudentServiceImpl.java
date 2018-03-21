@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.ceaf.exception.ResourceNotFoundException;
-import com.ceaft.controller.Sexo;
+import com.ceaft.enums.Sexo;
 import com.ceaft.dao.IAdeudoDAO;
 import com.ceaft.dao.IAlumnoDAO;
 import com.ceaft.dao.IAlumnoMatriculadoDAO;
