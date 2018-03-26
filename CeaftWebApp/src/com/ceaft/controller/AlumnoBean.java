@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -22,7 +23,7 @@ import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.AlumnoDTO;
 import com.ceaft.dto.HistoricoPieDTO;
 import com.ceaft.enums.Sexo;
-import com.ceaft.service.IStudentService;
+import com.ceaft.service.IAlumnoService;
 import com.ceaft.util.StringUtil;
 
 @ManagedBean
@@ -35,7 +36,7 @@ public class AlumnoBean extends CeaftBaseController{
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
-	private IStudentService svc;
+	private IAlumnoService svc;
 	private String alumnoId;
 	private AlumnoDTO alumnoModel;
 	private PieChartModel pieModel;
@@ -53,13 +54,6 @@ public class AlumnoBean extends CeaftBaseController{
 	@PostConstruct
     public void init() {
 		
-	}
-	
-	/**
-	 * @return the svc
-	 */
-	public IStudentService getSvc() {
-		return svc;
 	}
 	
 	/**
@@ -108,8 +102,11 @@ public class AlumnoBean extends CeaftBaseController{
 	 * @return the foto
 	 */
 	public StreamedContent getFoto() {
-		if(foto == null){
-			foto = obtenerFotoAlumno(alumnoModel);
+		FacesContext context = FacesContext.getCurrentInstance();
+	    if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+	        return new DefaultStreamedContent();
+	    }else {
+	    	foto = obtenerFotoAlumno(alumnoModel);
 		}
 		return foto;
 	}
@@ -141,7 +138,7 @@ public class AlumnoBean extends CeaftBaseController{
 	public String registrar(){
 		try{
 			if(!StringUtil.isEmpty(alumnoId)){
-				alumnoModel = svc.register(alumnoId);
+				alumnoModel = svc.registrar(alumnoId);
 				
 				//creating pie model
 				pieModel = new PieChartModel();
@@ -171,6 +168,15 @@ public class AlumnoBean extends CeaftBaseController{
 			showWindowDialog("infoMessageDialog");
 		}
 		return "";
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String cerrarSesion(){
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "cerrar";
 	}
 	
 	/**

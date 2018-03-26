@@ -39,5 +39,15 @@
 			</h:panelGrid>
 		</p:dialog>
 		
+		<p:dialog resizable="false" responsive="true" widgetVar="processingDialog" 
+			closable="false" modal="true">
+			<f:facet name="header">
+				Procesando...
+		    </f:facet>
+		    <h:panelGrid width="100%" style="text-align: center">
+				<h:graphicImage alt="processing" value="/resources/images/loading.gif" width="20"/>
+			</h:panelGrid>
+		</p:dialog>
+				
 	</h:body>
 </html>

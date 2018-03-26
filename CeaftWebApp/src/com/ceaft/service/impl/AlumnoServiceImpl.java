@@ -20,10 +20,10 @@ import com.ceaft.model.Alumno;
 import com.ceaft.model.AlumnoMatriculado;
 import com.ceaft.model.Asistencia;
 import com.ceaft.model.Deuda;
-import com.ceaft.service.IStudentService;
+import com.ceaft.service.IAlumnoService;
 
 @Stateless
-public class StudentServiceImpl implements IStudentService{
+public class AlumnoServiceImpl implements IAlumnoService{
 
 	@EJB
 	private IAlumnoDAO iAlumnoDAO;
@@ -38,7 +38,7 @@ public class StudentServiceImpl implements IStudentService{
 	private IAdeudoDAO iAdeudoDAO;
 	
 	@Override
-	public AlumnoDTO register(String id) throws ResourceNotFoundException {
+	public AlumnoDTO registrar(String id) throws ResourceNotFoundException {
 		try{
 			AlumnoMatriculado alumnoMatriculado = iAlumnoMatriculadoDAO.buscarAlumno(id);
 			if(alumnoMatriculado != null){

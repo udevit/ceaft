@@ -13,8 +13,19 @@
      <navigation-rule>
      	<from-view-id>/pages/asistencia.xhtml</from-view-id>
      	<navigation-case>
+     		<from-action>#{alumnoBean.registrar}</from-action>
      		<from-outcome>info</from-outcome>
      		<to-view-id>/pages/user-info.xhtml</to-view-id>
+     		<redirect/>
+     	</navigation-case>
+     </navigation-rule>
+     <navigation-rule>
+     	<from-view-id>/pages/user-info.xhtml</from-view-id>
+     	<navigation-case>
+     		<from-action>#{alumnoBean.cerrarSesion}</from-action>
+     		<from-outcome>cerrar</from-outcome>
+     		<to-view-id>/pages/asistencia.xhtml</to-view-id>
+     		<redirect/>
      	</navigation-case>
      </navigation-rule>
 </faces-config>

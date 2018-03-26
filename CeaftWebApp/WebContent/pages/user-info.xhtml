@@ -14,30 +14,34 @@
 						<h:graphicImage class="logo" alt="CEAFT" value="/resources/images/logo_CEAFT.jpeg" />
 						<p:panel>
 							<f:facet name="header">
-								<h:panelGrid columns="2" columnClasses="dialogHeaderColumn1,dialogHeaderColumn2">
+								<h:panelGrid columns="2">
 						    		<h:graphicImage alt="User logo" value="/resources/images/user-header.png" width="40"/>
 						    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.name.information']}"/>
 						    	</h:panelGrid>
 						    </f:facet>
-						    <h:panelGrid columns="2" cellpadding="10">
-						    	<p:graphicImage alt="User photo" value="#{alumnoBean.foto}" width="170" cache="false"/>
-						    	<h:panelGroup>
-						    		<h:panelGrid columns="2" style="text-align: left">
-								    	<p:outputLabel value="Matrícula"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.id}" readonly="true"/>
-								    	<p:outputLabel value="Nombre"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.nombre}" readonly="true"/>
-								    	<p:outputLabel value="Curso"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.nombreCurso}" readonly="true"/>
-								    	<p:outputLabel value="Horario"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.horario}" readonly="true"/>
-								    	<p:outputLabel value="Día de clase"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.diasClase}" readonly="true"/>
-								    	<p:outputLabel value="Profesor"/>
-								    	<p:inputText value="#{alumnoBean.alumnoModel.nombreProfesor}" readonly="true"/>
-								    </h:panelGrid>
-							    </h:panelGroup>
-						    </h:panelGrid>
+						    <h:panelGrid cellpadding="10">
+							    <h:panelGrid columns="2" cellpadding="10">
+							    	<p:graphicImage alt="User photo" value="#{alumnoBean.foto}" width="170" cache="false"/>
+							    	<h:panelGroup>
+							    		<h:panelGrid columns="2" style="text-align: left">
+									    	<p:outputLabel value="Matrícula"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.id}" readonly="true"  size="30"/>
+									    	<p:outputLabel value="Nombre"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.nombre}" readonly="true" size="30"/>
+									    	<p:outputLabel value="Curso"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.nombreCurso}" readonly="true"  size="30"/>
+									    	<p:outputLabel value="Horario"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.horario}" readonly="true"  size="30"/>
+									    	<p:outputLabel value="Día de clase"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.diasClase}" readonly="true"  size="30"/>
+									    	<p:outputLabel value="Profesor"/>
+									    	<p:inputText value="#{alumnoBean.alumnoModel.nombreProfesor}" readonly="true"  size="30"/>
+									    </h:panelGrid>
+								    </h:panelGroup>
+							    </h:panelGrid>
+							    <p:commandButton value="Salir" icon="fa fa-reply-all" action="#{alumnoBean.cerrarSesion}" 
+							    	onstart="PF('processingDialog').show();"/>
+							</h:panelGrid>
 						</p:panel>
 					</h:panelGrid>
 				</p:panel>
