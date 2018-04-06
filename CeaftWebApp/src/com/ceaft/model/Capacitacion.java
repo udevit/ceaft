@@ -8,10 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="CAPACITACION")
 public class Capacitacion implements Serializable {
 	
 	/**

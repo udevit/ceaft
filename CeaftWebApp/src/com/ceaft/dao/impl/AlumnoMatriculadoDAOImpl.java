@@ -1,36 +1,34 @@
 package com.ceaft.dao.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dao.IAlumnoMatriculadoDAO;
 import com.ceaft.model.AlumnoMatriculado;
-import com.ceaft.model.Curso;
-import com.ceaft.model.Grupo;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class AlumnoMatriculadoDAOImpl implements IAlumnoMatriculadoDAO{
 	
-	@PersistenceContext(unitName = "CeaftPersistenceUnit")
+	@PersistenceContext(unitName="CeaftPU")
     private EntityManager entityManager;
 	
-	@Override
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public AlumnoMatriculado buscarAlumno(String id) throws ResourceNotFoundException {
-		//TODO remover cuando se consulte a la BD
-		AlumnoMatriculado a = new AlumnoMatriculado();
-		a.setIdAlum(123345);
-		a.setMatric("MAT0001");
-		Grupo grupo = new Grupo();
-		grupo.setHorario("09:00 - 14:00");
-		grupo.setProf("Joe C Enriquez Fernandez");
-		Curso curso = new Curso();
-		curso.setNombre("Programación");
-		curso.setDiasClase("Lunes - Viernes");
-		grupo.setCurso(curso);
-		a.setGrupo(grupo);
-		return a;
+		Query query = entityManager.createQuery("from AlumnoMatriculado a where a.matric = :matric");
+		query.setParameter("matric", id);
+		List<AlumnoMatriculado> list = query.getResultList();
+		if(list.isEmpty()){
+			throw new ResourceNotFoundException("Matrícula no registrada"); 
+		}
+		return list.get(0);
 	}
 	
 }

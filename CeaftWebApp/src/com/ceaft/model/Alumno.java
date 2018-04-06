@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Alumno implements Serializable {
@@ -32,18 +31,6 @@ public class Alumno implements Serializable {
 	
 	@Column(name="MATRICULA")
 	private String matric;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Asistencia asistencia;
-
-	public Asistencia getAsistencia() {
-		return asistencia;
-	}
-
-	public void setAsistencia(Asistencia asistencia) {
-		this.asistencia = asistencia;
-	}
 
 	public long getIdAlum() {
 		return idAlum;

@@ -11,4 +11,6 @@ import com.ceaft.model.Asistencia;
 public interface IAsistenciaDAO {
 	List<Asistencia> obtenerAsistencias(String id);
 	List<HistoricoPieDTO> obtenerHistoricoPie(String id);
+	Asistencia obtenerAsistencia(String id);
+	void registraAsistencia(Asistencia asistencia);
 }

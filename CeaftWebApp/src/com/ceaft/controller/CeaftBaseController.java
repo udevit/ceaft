@@ -61,4 +61,13 @@ public abstract class CeaftBaseController implements Serializable {
         	.put(key, value);
 	}
 	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
+	protected String getRequestParameter(String key){
+		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(key);
+	}
+	
 }

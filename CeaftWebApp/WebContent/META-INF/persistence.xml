@@ -2,29 +2,24 @@
 <persistence version="2.0"
     xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="CeaftPersistenceUnit" transaction-type="JTA">
-        <!-- Persistence provider -->
-        <!-- <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
-        <!-- Data source -->
-        <!-- <jta-data-source>jdbc/ceaftDS</jta-data-source> -->
-        <!-- Entity classes -->
-        <class>com.ceaft.model.Alumno</class>
-        <class>com.ceaft.model.AlumnoMatriculado</class>
-        <class>com.ceaft.model.Asistencia</class>
-        <class>com.ceaft.model.Capacitacion</class>
-        <class>com.ceaft.model.Curso</class>
-        <class>com.ceaft.model.Deuda</class>
-        <class>com.ceaft.model.Grupo</class>
-        <class>com.ceaft.model.HistoricoPie</class>
-        <properties>
-            <!-- The JDBC driver of your database -->
-            <!-- <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />  -->
-            <!-- The JDBC URL to the database instance -->
-            <!-- <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:orcl" />  -->
-            <!-- The database username -->
-            <!-- <property name="javax.persistence.jdbc.user" value="ceaft" />  -->
-            <!-- The database password -->
-            <!-- <property name="javax.persistence.jdbc.password" value="123" />  -->
-        </properties>
-    </persistence-unit>
+    <persistence-unit name="CeaftPU" transaction-type="JTA">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>ceaftDS</jta-data-source>
+		<class>com.ceaft.model.Alumno</class>
+		<class>com.ceaft.model.AlumnoMatriculado</class>
+		<class>com.ceaft.model.Asistencia</class>
+		<class>com.ceaft.model.Capacitacion</class>
+		<class>com.ceaft.model.Curso</class>
+		<class>com.ceaft.model.Deuda</class>
+		<class>com.ceaft.model.Grupo</class>
+		<class>com.ceaft.model.Curso</class>
+		<properties>
+            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.OracleDictionary" />
+            <property name="openjpa.jdbc.DBDictionary" value="oracle(maxEmbeddedBlobSize=-1,maxEmbeddedClobSize=-1)" />
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
+            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+ 			<property name="eclipselink.logging.parameters" value="true"/>
+		</properties>
+	</persistence-unit>
 </persistence>

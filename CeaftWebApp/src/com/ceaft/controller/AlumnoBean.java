@@ -19,6 +19,7 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.chart.PieChartModel;
 
+import com.ceaf.exception.ResourceAlreadyExistsException;
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.dto.AlumnoDTO;
 import com.ceaft.dto.HistoricoPieDTO;
@@ -135,6 +136,27 @@ public class AlumnoBean extends CeaftBaseController{
 	/**
 	 * 
 	 */
+	public void buscar(){
+		try{
+			if(!StringUtil.isEmpty(alumnoId)){
+				alumnoModel = svc.obtenerInformacion(alumnoId);
+				
+				//creating pie model
+				pieModel = new PieChartModel();
+				for(HistoricoPieDTO pieData : alumnoModel.getHistoricoPieData()){
+					pieModel.set(pieData.getDia(), pieData.getValor());
+				}
+				pieModel.setTitle("Historial de Asistencia");
+		        pieModel.setLegendPosition("w");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 */
 	public String registrar(){
 		try{
 			if(!StringUtil.isEmpty(alumnoId)){
@@ -154,11 +176,11 @@ public class AlumnoBean extends CeaftBaseController{
 				message.setMessage("Favor de ingresar la matrícula del alumno.");
 				showWindowDialog("infoMessageDialog");
 			}
-		}catch(ResourceNotFoundException e){
+		}catch(ResourceNotFoundException | ResourceAlreadyExistsException e){
 			//show an error message
 			e.printStackTrace();
 			message.setIcon("warning.png");
-			message.setMessage("El alumno ingreado no se encuentra matriculado.");
+			message.setMessage(e.getMessage());
 			showWindowDialog("infoMessageDialog");
 		}catch (Exception e) {
 			//show an error
@@ -203,7 +225,6 @@ public class AlumnoBean extends CeaftBaseController{
 				ex.printStackTrace();
 			}
 		}
-		
 		return photo;
 	}
 	

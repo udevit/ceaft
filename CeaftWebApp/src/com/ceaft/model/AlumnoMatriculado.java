@@ -28,8 +28,6 @@ public class AlumnoMatriculado implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "alumnoMatric", cascade = CascadeType.ALL)
 	private Grupo grupo;
 
-
-
 	public Grupo getGrupo() {
 		return grupo;
 	}

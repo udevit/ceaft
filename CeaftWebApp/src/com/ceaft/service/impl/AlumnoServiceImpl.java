@@ -1,11 +1,14 @@
 package com.ceaft.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import com.ceaf.exception.ResourceAlreadyExistsException;
 import com.ceaf.exception.ResourceNotFoundException;
 import com.ceaft.enums.Sexo;
 import com.ceaft.dao.IAdeudoDAO;
@@ -38,7 +41,51 @@ public class AlumnoServiceImpl implements IAlumnoService{
 	private IAdeudoDAO iAdeudoDAO;
 	
 	@Override
-	public AlumnoDTO registrar(String id) throws ResourceNotFoundException {
+	public AlumnoDTO registrar(String id) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+		try{
+			//buscar al alumno
+			AlumnoDTO alumnoDTO = buscarAlumno(id);
+			//validar si el alumno ya está registrado
+			Asistencia asistencia = iAsistenciaDAO.obtenerAsistencia(alumnoDTO.getId());
+			if(asistencia == null){
+				asistencia = new Asistencia();
+				asistencia.setFecha(new Date());
+				asistencia.setMatric(id);
+				asistencia.setAlumnoMatriculado(iAlumnoMatriculadoDAO.buscarAlumno(id));
+				iAsistenciaDAO.registraAsistencia(asistencia);
+				
+				alumnoDTO.getAsistencia().addAll(obtenerHistorialAsistencia(id));
+				alumnoDTO.getHistoricoPieData().addAll(iAsistenciaDAO.obtenerHistoricoPie(id));
+				
+				return alumnoDTO;
+			}else{
+				throw new ResourceAlreadyExistsException("El alumno ya registró sus asistencia.");
+			}
+		}catch(Exception e){
+			throw e;
+		}
+	}
+	
+	@Override
+	public AlumnoDTO obtenerInformacion(String id) throws ResourceNotFoundException, ResourceAlreadyExistsException {
+		try{
+			AlumnoDTO alumnoDTO = buscarAlumno(id);
+			alumnoDTO.getAsistencia().addAll(obtenerHistorialAsistencia(id));
+			alumnoDTO.getHistoricoPieData().addAll(iAsistenciaDAO.obtenerHistoricoPie(id));
+			return alumnoDTO;
+		}catch(Exception e){
+			throw e;
+		}
+	}
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws ResourceNotFoundException
+	 * @throws ResourceAlreadyExistsException
+	 */
+	private AlumnoDTO buscarAlumno(String id) throws ResourceNotFoundException, ResourceAlreadyExistsException {
 		try{
 			AlumnoMatriculado alumnoMatriculado = iAlumnoMatriculadoDAO.buscarAlumno(id);
 			if(alumnoMatriculado != null){
@@ -51,31 +98,37 @@ public class AlumnoServiceImpl implements IAlumnoService{
 				alumnoDTO.setNombreProfesor(alumnoMatriculado.getGrupo().getProf());
 				alumnoDTO.setHorario(alumnoMatriculado.getGrupo().getHorario());
 				alumnoDTO.setDiasClase(alumnoMatriculado.getGrupo().getCurso().getDiasClase());
-				List<Asistencia> asistencias = iAsistenciaDAO.obtenerAsistencias(id);
-				//TODO remover cuando se tenga la funcionalidad
-				String estados[] = {"green-circle.png", "yellow-circle.png", "red-circle.png"};
-				//
-				for(Asistencia attdnc : asistencias){
-					alumnoDTO.getAsistencia().add(new AsistenciaDTO(attdnc.getFecha(), estados[new Random().nextInt(3)]));
-				}
+				
 				List<Deuda> dedudas = iAdeudoDAO.obtenerDeudas(id);
 				for(Deuda deuda : dedudas){
 					alumnoDTO.getDeuda().add(new DeudaDTO(deuda.getFolio(), deuda.getAdeudoTot().doubleValue(), 
 						deuda.getMontoRecup(), deuda.getMontoExtra()));
 				}
 				
-				List<HistoricoPieDTO> historicoPie = iAsistenciaDAO.obtenerHistoricoPie(id);
-				for(HistoricoPieDTO historico :  historicoPie){
-					alumnoDTO.getHistoricoPieData().add(new HistoricoPieDTO(historico.getDia(), historico.getValor()));
-				}
-				
 				return alumnoDTO;
 			}else{
-				throw new ResourceNotFoundException("<< Estudiante no encontrado >>");
+				throw new ResourceNotFoundException("El Alumno no está matriculado.");
 			}
 		}catch(Exception e){
 			throw e;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	private List<AsistenciaDTO> obtenerHistorialAsistencia(String id){
+		List<AsistenciaDTO> asistenciaDTOs = new ArrayList<>();
+		List<Asistencia> asistencias = iAsistenciaDAO.obtenerAsistencias(id);
+		//TODO remover cuando se tenga la funcionalidad
+		String estados[] = {"green-circle.png", "yellow-circle.png", "red-circle.png"};
+		//
+		for(Asistencia attdnc : asistencias){
+			asistenciaDTOs.add(new AsistenciaDTO(attdnc.getFecha(), estados[new Random().nextInt(3)]));
+		}
+		return asistenciaDTOs;
 	}
 
 }

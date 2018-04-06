@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
 @Table(name="DEUDAS")
 public class Deuda implements Serializable {
@@ -80,6 +81,13 @@ public class Deuda implements Serializable {
 
 	public void setFolio(long folio) {
 		this.folio = folio;
+	}
+
+	public boolean equals(Object obj){
+		if(!(obj instanceof Deuda) || ((Deuda)obj).getIdDeuda() != this.getIdDeuda()){
+			return false;
+		}
+		return true;
 	}
 	
 }

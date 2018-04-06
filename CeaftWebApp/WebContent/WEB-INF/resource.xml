@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <Resource
+        id="jdbc/ceaftDS"
+        type="DataSource">
+        JdbcDriver oracle.jdbc.OracleDriver
+        JdbcUrl jdbc:oracle:thin:@localhost:1521:orcl
+        UserName ceaft
+        Password 1234
+        JtaManaged true
+        TestOnBorrow false
+        MaxActive 20        
+    </Resource>    
+</tomee>

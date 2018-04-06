@@ -7,8 +7,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Asistencia implements Serializable{
@@ -19,15 +25,20 @@ public class Asistencia implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name = "SEQ",sequenceName = "SEQ_ASISTENCIA_ID",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="SEQ")
 	@Column(name="ID_ASISTENCIA")
 	private long idAsis;
 	
 	@Column(name="MATRICULA")
 	private String matric;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "asistencia", cascade = CascadeType.ALL)
-	private Alumno alumno;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name="ID_ALUMNO")
+	private AlumnoMatriculado alumnoMatriculado;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA")
 	private Date fecha;
 
@@ -72,12 +83,12 @@ public class Asistencia implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
+	public AlumnoMatriculado getAlumnoMatriculado() {
+		return alumnoMatriculado;
 	}
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
+	public void setAlumnoMatriculado(AlumnoMatriculado alumnoMatriculado) {
+		this.alumnoMatriculado = alumnoMatriculado;
 	}
 	
 }

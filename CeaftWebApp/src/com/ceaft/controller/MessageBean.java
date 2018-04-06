@@ -1,11 +1,17 @@
 package com.ceaft.controller;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class MessageBean {
+public class MessageBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String icon;
 	private String message;
 	/**
