@@ -31,7 +31,8 @@ public class AsistenciaDAOImpl implements IAsistenciaDAO{
 
 	@Override
 	public List<HistoricoPieDTO> obtenerHistoricoPie(String id) {
-		Query query = entityManager.createNativeQuery("select count(to_char(fecha, 'day')) as total, to_char(fecha, 'day') from asistencia group by to_char(fecha, 'day') order by to_char(fecha, 'day') asc");
+		Query query = entityManager.createNativeQuery("select count(to_char(fecha, 'day')) as total, to_char(fecha, 'day') from asistencia where matricula = ? group by to_char(fecha, 'day') order by to_char(fecha, 'day') asc");
+		query.setParameter(1, id);
 		@SuppressWarnings("unchecked")
 		List<Object[]> rawResultList = query.getResultList();
 		List<HistoricoPieDTO> historico = new ArrayList<>();
