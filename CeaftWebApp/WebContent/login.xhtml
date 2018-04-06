@@ -9,10 +9,10 @@
 		<ui:composition template="./templates/ceaft-basic-template.xhtml">
 			<ui:define name="content">
 				
-				<p:dialog widgetVar="loginDialog" visible="true" closable="false" 
-					resizable="false" responsive="true" width="400">
+				<p:dialog widgetVar="loginDialog" visible="true" closable="false" modal="true"
+					resizable="false" responsive="true" width="430">
 					<f:facet name="header">
-						<h:panelGrid columns="2" width="100%">
+						<h:panelGrid columns="2">
 				    		<h:graphicImage alt="User logo" value="/resources/images/login-icon.png" width="40"/>
 				    		<h:outputLabel value="#{msg['ceaft.app.name']} - #{msg['ceaft.app.login.title']}"/>
 				    	</h:panelGrid>
@@ -24,16 +24,18 @@
 						 		 <input type="text" name="j_username" placeholder="Ingrese su usuario" size="24"
 						 		 	class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all"/>
 						 		<p:outputLabel styleClass="fa fa-key"/>
-						 		<input type="password" name="j_password" placeholder="Ingrese su contraseña" size="24"
-						 			class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"/>
-						 	</h:panelGrid>
-						 	<h:panelGrid cellspacing="11" width="100%" style="text-align: right">
-						 		<p:commandButton value="Entrar" ajax="false"/>
+						 		<h:panelGroup>
+						 			<h:panelGrid columns="2">
+							 			<input type="password" name="j_password" placeholder="Ingrese su contraseña" size="24"
+							 				class="ui-inputfield ui-password ui-widget ui-state-default ui-corner-all"/>
+							 			<p:commandButton icon="fa fa-sign-in" ajax="false"/>
+							 		</h:panelGrid>
+						 		</h:panelGroup>
 						 	</h:panelGrid>
 						 </h:form>
 					 </p:panel>
 					 <f:facet name="footer">
-					 	<h:panelGrid columnClasses="dialogFooter">
+					 	<h:panelGrid columnClasses="dialogFooter" width="99%">
 				    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
 				    	</h:panelGrid>
 					 </f:facet>

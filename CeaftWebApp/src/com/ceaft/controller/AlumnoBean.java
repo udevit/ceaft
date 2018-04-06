@@ -136,7 +136,7 @@ public class AlumnoBean extends CeaftBaseController{
 	/**
 	 * 
 	 */
-	public void buscar(){
+	public String buscar(){
 		try{
 			if(!StringUtil.isEmpty(alumnoId)){
 				alumnoModel = svc.obtenerInformacion(alumnoId);
@@ -148,10 +148,22 @@ public class AlumnoBean extends CeaftBaseController{
 				}
 				pieModel.setTitle("Historial de Asistencia");
 		        pieModel.setLegendPosition("w");
+		        
+		        return "info";
+			}else{
+				//show an error
+				message.setIcon("info.png");
+				message.setMessage("Favor de ingresar la matrícula del alumno.");
+				showWindowDialog("infoMessageDialog");
 			}
 		}catch (Exception e) {
+			//show an error
 			e.printStackTrace();
+			message.setIcon("error.png");
+			message.setMessage("Sistema no disponible por el momento.Si el error persiste contacte al administrador.");
+			showWindowDialog("infoMessageDialog");
 		}
+		return "";
 	}
 	
 	/**
@@ -186,7 +198,7 @@ public class AlumnoBean extends CeaftBaseController{
 			//show an error
 			e.printStackTrace();
 			message.setIcon("error.png");
-			message.setMessage("Sistema no disponible por el momento. Si el error persiste contacte al administrador.");
+			message.setMessage("Sistema no disponible por el momento.Si el error persiste contacte al administrador.");
 			showWindowDialog("infoMessageDialog");
 		}
 		return "";

@@ -18,19 +18,23 @@
 				    	</h:panelGrid>
 				    </f:facet>
 					 <p:panel>
-					 	<h:panelGrid>
-					 		<h:form>
-					 			<p:remoteCommand name="register" action="#{alumnoBean.registrar}"
-					 				onstart="PF('registeringDialog').show();" oncomplete="PF('registeringDialog').hide();" update="panelInfoMsg"
-					 				onerror="PF('registeringDialog').hide();"/>
+					 	<h:form>
+				 			<p:remoteCommand name="register" action="#{alumnoBean.registrar}"
+				 				onstart="PF('registrandoDialog').show();" oncomplete="PF('registrandoDialog').hide();" update="panelInfoMsg"
+				 				onerror="PF('registrandoDialog').hide();"/>
+						 	<h:panelGrid cellspacing="10" columns="3">
 					 			<p:inputText id="userId" value="#{alumnoBean.alumnoId}"
 						 			placeholder="Presenta tu credencial para registrar tu asistencia" size="50"
 						 			onkeypress="if (event.keyCode == 13) { register(); return false; }"/>
-						 	</h:form>
-					 	</h:panelGrid>
+						 		<p:commandButton icon="fa fa-arrow-right" onclick="register();"/>
+					 			<p:commandButton icon="fa fa-search" action="#{alumnoBean.buscar}"
+					 				onstart="PF('consultandoDialog').show();" oncomplete="PF('consultandoDialog').hide();" update="panelInfoMsg"
+				 					onerror="PF('consultandoDialog').hide();"/>
+						 	</h:panelGrid>
+						 </h:form>
 					 </p:panel>
 					 <f:facet name="footer">
-					 	<h:panelGrid columnClasses="dialogFooter">
+					 	<h:panelGrid columnClasses="dialogFooter" width="99%">
 				    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
 				    	</h:panelGrid>
 					 </f:facet>
@@ -55,22 +59,32 @@
 					 	</h:panelGrid>
 					 </p:panel>
 					 <f:facet name="footer">
-					 	<h:panelGrid columnClasses="dialogFooter">
+					 	<h:panelGrid columnClasses="dialogFooter" width="99%">
 				    		<h:outputLabel value="Versión #{msg['ceaft.app.version']}"/>
 				    	</h:panelGrid>
 					 </f:facet>
 				</p:dialog>
 				
-				<p:dialog resizable="false" responsive="true" widgetVar="registeringDialog" 
+				<p:dialog resizable="false" responsive="true" widgetVar="registrandoDialog" 
 					closable="false" modal="true">
 					<f:facet name="header">
 						Registrando...
 				    </f:facet>
 				    <h:panelGrid width="100%" style="text-align: center">
-						<h:graphicImage alt="registering" value="/resources/images/loading.gif" width="20"/>
+						<h:graphicImage alt="ajaxIcon" value="/resources/images/loading.gif" width="20"/>
 					</h:panelGrid>
 				</p:dialog>
-		
+				
+				<p:dialog resizable="false" responsive="true" widgetVar="consultandoDialog"
+					closable="false" modal="true">
+					<f:facet name="header">
+						Consultando...
+				    </f:facet>
+				    <h:panelGrid width="100%" style="text-align: center">
+						<h:graphicImage alt="ajaxIcon" value="/resources/images/loading.gif" width="20"/>
+					</h:panelGrid>
+				</p:dialog>
+				
 			</ui:define>
 		</ui:composition>
 	</h:body>
