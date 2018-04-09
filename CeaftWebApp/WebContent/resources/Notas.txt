@@ -2,3 +2,14 @@ http://www.vogella.com/tutorials/JavaPersistenceAPI/article.html
 
 
 https://o7planning.org/en/11071/create-a-simple-login-application-and-secure-pages-with-java-servlet-filter
+
+
+jdbc:sqlserver://localhost:1433;DataBaseName=testDB
+
+ String connectionUrl = "jdbc:sqlserver://localhost:1433;" +  
+         "databaseName=AdventureWorks;user=UserName;password=*****";  
+         
+com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+
+https://www.microsoft.com/en-us/download/details.aspx?id=56615
