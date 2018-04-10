@@ -14,8 +14,6 @@
 		<class>com.ceaft.model.Grupo</class>
 		<class>com.ceaft.model.Curso</class>
 		<properties>
-            <property name="openjpa.jdbc.DBDictionary" value="org.apache.openjpa.jdbc.sql.OracleDictionary" />
-            <property name="openjpa.jdbc.DBDictionary" value="oracle(maxEmbeddedBlobSize=-1,maxEmbeddedClobSize=-1)" />
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
             <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
