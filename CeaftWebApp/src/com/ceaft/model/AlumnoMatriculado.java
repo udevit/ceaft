@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,13 +20,14 @@ public class AlumnoMatriculado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_ALUMNO")
+	@Column(name="IDALUMNOM")
 	private long idAlum;
 	
 	@Column(name="MATRICULA")
 	private String matric;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "alumnoMatric", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="GRUPO")
 	private Grupo grupo;
 
 	public Grupo getGrupo() {

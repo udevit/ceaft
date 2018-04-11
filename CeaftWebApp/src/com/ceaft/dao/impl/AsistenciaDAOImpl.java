@@ -31,13 +31,14 @@ public class AsistenciaDAOImpl implements IAsistenciaDAO{
 
 	@Override
 	public List<HistoricoPieDTO> obtenerHistoricoPie(String id) {
-		Query query = entityManager.createNativeQuery("select count(to_char(fecha, 'day')) as total, to_char(fecha, 'day') from asistencia where matricula = ? group by to_char(fecha, 'day') order by to_char(fecha, 'day') asc");
+		//Query query = entityManager.createNativeQuery("select count(to_char(fecha, 'day')) as total, to_char(fecha, 'day') from asistencia where matricula = ? group by to_char(fecha, 'day') order by to_char(fecha, 'day') asc");
+		Query query = entityManager.createNativeQuery("select count(DATENAME(dw,Fecha)) as total, DATENAME(dw,Fecha) from asistencia where matricula = ? group by DATENAME(dw,Fecha) order by DATENAME(dw,Fecha) asc");
 		query.setParameter(1, id);
 		@SuppressWarnings("unchecked")
 		List<Object[]> rawResultList = query.getResultList();
 		List<HistoricoPieDTO> historico = new ArrayList<>();
 		for (Object[] resultElement : rawResultList) {
-			historico.add(new HistoricoPieDTO((String)resultElement[1], ((BigDecimal)resultElement[0]).longValue()));
+			historico.add(new HistoricoPieDTO((String)resultElement[1], getValue(resultElement[0])));
 		}
 		return historico;
 	}
@@ -59,4 +60,17 @@ public class AsistenciaDAOImpl implements IAsistenciaDAO{
 		entityManager.persist(asistencia);
 	}
 
+	/**
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	private long getValue(Object obj){
+		if(obj instanceof Integer){
+			return ((Integer)obj).longValue();
+		}else{
+			return ((BigDecimal)obj).longValue();
+		}
+	}
+	
 }

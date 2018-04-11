@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Grupo implements Serializable {
@@ -20,7 +19,7 @@ public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_GRUPO")
+	@Column(name="IDGRUPO")
 	private long idGpo;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "grupo", cascade = CascadeType.ALL)
@@ -44,8 +43,7 @@ public class Grupo implements Serializable {
 	@Column(name="AULA")
 	private String aula;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@OneToOne(fetch = FetchType.LAZY, mappedBy="grupo")
 	private AlumnoMatriculado alumnoMatric;
 	
 	public AlumnoMatriculado getAlumnoMatric() {

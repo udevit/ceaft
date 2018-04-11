@@ -156,6 +156,12 @@ public class AlumnoBean extends CeaftBaseController{
 				message.setMessage("Favor de ingresar la matrícula del alumno.");
 				showWindowDialog("infoMessageDialog");
 			}
+		}catch(ResourceNotFoundException e){
+			//show an error message
+			e.printStackTrace();
+			message.setIcon("warning.png");
+			message.setMessage(e.getMessage());
+			showWindowDialog("infoMessageDialog");
 		}catch (Exception e) {
 			//show an error
 			e.printStackTrace();

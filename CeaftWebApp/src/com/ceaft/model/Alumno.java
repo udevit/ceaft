@@ -17,7 +17,7 @@ public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_ALUMNO")
+	@Column(name="IDALUMNO")
 	private long idAlum;
 	
 	@Column(name="NOMBRE")

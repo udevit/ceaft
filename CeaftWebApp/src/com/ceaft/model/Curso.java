@@ -18,7 +18,7 @@ public class Curso implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_CURSO")
+	@Column(name="IDCURSO")
 	private long id;
 	
 	@Column(name="DURACION")
@@ -30,8 +30,8 @@ public class Curso implements Serializable{
 	@Column(name="DIAS_DE_CLASE")
 	private String diasClase;
 	
-	@Column(name="CLASE_X_SEMANA")
-	private long claseXSem;
+	@Column(name="CLASES_X_SEMANA")
+	private long clasesXSem;
 	
 	@Column(name="COSTO_QUINCENAL")
 	private Double costoQuin;
@@ -75,12 +75,12 @@ public class Curso implements Serializable{
 		this.diasClase = diasClase;
 	}
 
-	public long getClaseXSem() {
-		return claseXSem;
+	public long getClasesXSem() {
+		return clasesXSem;
 	}
 
-	public void setClaseXSem(long claseXSem) {
-		this.claseXSem = claseXSem;
+	public void setClasesXSem(long clasesXSem) {
+		this.clasesXSem = clasesXSem;
 	}
 
 	public Double getCostoQuin() {

@@ -17,7 +17,7 @@ public class Deuda implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_DEUDA")
+	@Column(name="IDDEUDA")
 	private long idDeuda;
 	
 	@Column(name="MATRICULA")
